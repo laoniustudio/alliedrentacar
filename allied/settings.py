@@ -25,7 +25,7 @@ SECRET_KEY = 'g=f4cr0x*c2=6nv$514&u-wqhv!0=52p6qt19c+o$2=61krmy#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS =  ['floating-refuge-57219.herokuapp.com', '.herokuapp.com']
+ALLOWED_HOSTS =  []
 
 # Application definition
 
@@ -124,15 +124,9 @@ import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
-
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles') #for heroku
 STATIC_URL = '/static/'
-
-# Extra places for collectstatic to find static files. for heroku
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'static'),
-)
-
-# Simplified static file serving.
-# https://warehouse.python.org/project/whitenoise/   for heroku
+STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, "static"),
+    ]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
