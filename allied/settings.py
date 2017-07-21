@@ -25,7 +25,7 @@ SECRET_KEY = 'g=f4cr0x*c2=6nv$514&u-wqhv!0=52p6qt19c+o$2=61krmy#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS =  ['floating-refuge-57219.herokuapp.com']
+ALLOWED_HOSTS =  ['floating-refuge-57219.herokuapp.com','127.0.0.1']
 
 # Application definition
 
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounting.apps.AccountingConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -120,13 +121,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 # Update database configuration with $DATABASE_URL.
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
-
+# import dj_database_url
+# db_from_env = dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(db_from_env)
+#
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
         os.path.join(BASE_DIR, "static"),
     ]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
