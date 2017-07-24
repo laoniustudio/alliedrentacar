@@ -5641,7 +5641,6 @@ body.rtl .checkbox label::after {
   color: #f55753;
 }
 .error {
-  font-size: 12px;
   color: #f55753;
   display: block;
 }

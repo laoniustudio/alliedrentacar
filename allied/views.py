@@ -15,5 +15,5 @@ def homesignin(request):
             return redirect('accounting:caselist')
 
         else:
-            return render(request,'signin.html',{'error':'username or password is not correct !'})
+            return render(request,'signin.html',{'error':'Username or password is not correct !'})
     return render(request, 'signin.html')

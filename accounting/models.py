@@ -7,16 +7,14 @@ class Post (models.Model):
     contractNumber = models.CharField(max_length=200, blank= True)
     plateNumber = models.CharField(max_length=200,blank= True)
     dateOutTime = models.DateTimeField()
-    dateInTime = models.DateTimeField()
+    dateInTime = models.DateTimeField(blank=True,null=True)
     STATUS_CHOICES = (
-        ('ALL', 'All'),
-        ('ONRENT', 'On Rent'),
-        ('REVIEW', 'Ready for review'),
-        ('PASS', 'Pass'),
-        ('FAIL', 'Fail'),
+        ('On Rent', 'On Rent'),
+        ('Ready for review', 'Ready for review'),
+        ('Pass', 'Pass'),
+        ('Fail', 'Fail'),
     )
-    status = models.CharField(max_length=50,choices=STATUS_CHOICES,default='REVIEW')
-    rentOut = models.BooleanField(default=False)
+    status = models.CharField(max_length=50,choices=STATUS_CHOICES,default='Ready for review')
     damage =  models.BooleanField(default=False)
     def __str__(self):
         if self.contractNumber:
@@ -26,6 +24,7 @@ class Post (models.Model):
 
 class AllImage(models.Model):
     post = models.ForeignKey(Post,related_name='moreImg')
+    mainImg = models.ImageField(upload_to="images")
     dashboardImg = models.ImageField(upload_to="images")
     frontImg = models.ImageField(upload_to="images")
     passFrontImg = models.ImageField(upload_to="images")
