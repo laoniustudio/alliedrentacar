@@ -8,10 +8,10 @@ body {
 }
 /* nav font */
 .navbar-inverse .navbar-nav .nav-link {
-    color: #626262;
+    color: #99a7b9;
 }
 .navbar-inverse .navbar-nav .active>.nav-link, .navbar-inverse .navbar-nav .nav-link.active, .navbar-inverse .navbar-nav .nav-link.open, .navbar-inverse .navbar-nav .open>.nav-link {
-    color: #626262;
+    color: #99a7b9;
 }
 /* mobile nav button */
 .navbar-toggler-right {
@@ -26,4 +26,5 @@ body {
 .navbar-nav > li{
   margin-left: 2rem;
 }
+
 
