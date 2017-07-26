@@ -7,7 +7,7 @@
 
 {% block content %}
 
-<div class="container">
+<div class="container" ng-controller="alliedController">
 
 {#            <div class="col-lg-6">#}
 {#    <div class="input-group">#}
@@ -26,7 +26,7 @@
 {#      <option>5</option>#}
 {#    </select>#}
 
-    <div ng-controller="filterbarCtrl as ctrl" layout-padding ng-cloak>
+    <div  layout-padding ng-cloak>
 
             <md-card-title>
 
@@ -36,24 +36,30 @@
               <div layout="row">
                 <md-input-container flex="25" class="mr-5">
                       <label class="md-title">FILTER BY CONTRACT NO.</label>
-                      <input type="text" ng-model="searchText.contractNumber">
+                      <input type="text" ng-model="searchText">
                 </md-input-container>
 
                 <md-input-container flex="15" >
                       <label>FILTER BY DATE</label>
                 <md-select ng-model="myDateStatus">
-                      <md-option ng-repeat="datestatus in dateStatus" value="{% verbatim %}{{datestatus}}{% endverbatim %}">{% verbatim %}{{datestatus}}{% endverbatim %}</md-option>
+                        <md-option value="Date in" selected>Date in</md-option>
+                        <md-option value="Date out">Date Out</md-option>
                 </md-select>
                 </md-input-container>
 
                 <md-input-container class="mr-5">
-                      <md-datepicker ng-model="user.submissionDate"></md-datepicker>
+                      <md-datepicker ng-model="searchText" ></md-datepicker>
                 </md-input-container>
 
                 <md-input-container flex="20" class="mr-5">
                       <label>FILTER BY STATUS</label>
-                <md-select ng-model="myStatus">
-                      <md-option ng-repeat="status in statusDefult" value="{% verbatim %}{{status}}{% endverbatim %}">{% verbatim %}{{status}}{% endverbatim %}</md-option>
+                <md-select ng-model="searchText" ng-change="change(searchText)">
+
+                        <md-option value>All</md-option>
+                        <md-option value="On rent">On rent</md-option>
+                        <md-option value="Ready for review">Ready for review</md-option>
+                        <md-option value="Pass">Pass</md-option>
+                        <md-option value="Fail">Fail</md-option>
                 </md-select>
                 </md-input-container>
 
@@ -62,7 +68,7 @@
 
     </div>
 
-    <table class="table table-hover" ng-controller="alliedController" >
+    <table class="table table-hover" >
               <thead>
                 <tr>
                   <th>CONTRACT NO.</th>
@@ -74,16 +80,19 @@
                 </tr>
               </thead>
               <tbody>
+              {% verbatim %}
+
                 <tr ng-repeat="post in posts | filter:searchText" >
-                  <th>{% verbatim %}{{post.contractNumber}}{% endverbatim %}</th>
-                  <td>{% verbatim %}{{post.plateNumber}}{% endverbatim %}</td>
-                  <td>{% verbatim %}{{post.contractNumber}}{% endverbatim %}</td>
-                  <td>{% verbatim %}{{post.dateOutTime}}{% endverbatim %}</td>
-                  <td>{% verbatim %}{{post.dateInTime}}{% endverbatim %}</td>
+                  <th>{{post.contractNumber}}</th>
+                  <td>{{post.plateNumber}}</td>
+                  <td>{{post.contractNumber}}</td>
+                  <td>{{post.dateOutTime }}</td>
+                  <td>{{post.dateInTime }}</td>
                   <td><span class="badge badge-pill badge-warning" ng-if="post.damage">!</span>
                       <span class="badge badge-pill badge-success" ng-if="!post.damage">R</span>
-                      {% verbatim %}{{post.status}}{% endverbatim %}</td>
+                      {{post.status}}</td>
                 </tr>
+              {% endverbatim %}
               </tbody>
     </table>
 

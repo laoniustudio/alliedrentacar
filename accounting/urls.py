@@ -6,5 +6,5 @@ app_name = 'accounting'
 
 urlpatterns = [
     url(r'^$',login_required(CaseList.as_view()),name='caselist'),
-    url(r'^/logout$',logout_view,name='logout'),
+    url(r'^logout$',logout_view,name='logout'),
 ]

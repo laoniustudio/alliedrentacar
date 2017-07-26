@@ -6,8 +6,8 @@ class Post (models.Model):
 
     contractNumber = models.CharField(max_length=200, blank= True)
     plateNumber = models.CharField(max_length=200,blank= True)
-    dateOutTime = models.DateTimeField()
-    dateInTime = models.DateTimeField(blank=True,null=True)
+    dateOutTime = models.CharField(max_length=50)
+    dateInTime = models.CharField(blank=True,null=True,max_length=50)
     STATUS_CHOICES = (
         ('On Rent', 'On Rent'),
         ('Ready for review', 'Ready for review'),
@@ -16,11 +16,13 @@ class Post (models.Model):
     )
     status = models.CharField(max_length=50,choices=STATUS_CHOICES,default='Ready for review')
     damage =  models.BooleanField(default=False)
+
     def __str__(self):
         if self.contractNumber:
             return self.contractNumber
         else:
             return self.plateNumber
+
 
 class AllImage(models.Model):
     post = models.ForeignKey(Post,related_name='moreImg')
