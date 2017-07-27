@@ -33,29 +33,31 @@
             </md-card-title>
 
             <md-card-content>
-              <div layout="row">
+              <div layout="row" >
                 <md-input-container flex="25" class="mr-5">
                       <label class="md-title">FILTER BY CONTRACT NO.</label>
-                      <input type="text" ng-model="searchText">
+                      <input type="text" ng-model="searchAll">
                 </md-input-container>
 
                 <md-input-container flex="15" >
                       <label>FILTER BY DATE</label>
-                <md-select ng-model="myDateStatus">
-                        <md-option value="Date in" selected>Date in</md-option>
-                        <md-option value="Date out">Date Out</md-option>
+                <md-select ng-model="myDateStatus" ng-change="changeInOut(myDateStatus)" >
+                        <md-option value="Date in"  >Date in</md-option>
+                        <md-option value="Date out" selected>Date Out</md-option>
                 </md-select>
                 </md-input-container>
 
-                <md-input-container class="mr-5">
-                      <md-datepicker ng-model="searchText" ></md-datepicker>
+                <md-input-container  class="mr-5">
+                      <md-datepicker ng-model="searchDate[searchStatus]"  ng-change="convertDate(searchDate[searchStatus])"></md-datepicker>
+
                 </md-input-container>
+
 
                 <md-input-container flex="20" class="mr-5">
                       <label>FILTER BY STATUS</label>
-                <md-select ng-model="searchText" ng-change="change(searchText)">
+                <md-select ng-model="textLabel" ng-change="changeStatus(textLabel)">
 
-                        <md-option value>All</md-option>
+                        <md-option value="All">All</md-option>
                         <md-option value="On rent">On rent</md-option>
                         <md-option value="Ready for review">Ready for review</md-option>
                         <md-option value="Pass">Pass</md-option>
@@ -82,12 +84,12 @@
               <tbody>
               {% verbatim %}
 
-                <tr ng-repeat="post in posts | filter:searchText" >
+                <tr ng-repeat="post in posts | filter:searchText | filter:searchDate:searchStatus | filter:searchAll" >
                   <th>{{post.contractNumber}}</th>
                   <td>{{post.plateNumber}}</td>
                   <td>{{post.contractNumber}}</td>
                   <td>{{post.dateOutTime }}</td>
-                  <td>{{post.dateInTime }}</td>
+                  <td>{{post.dateInTime  }}</td>
                   <td><span class="badge badge-pill badge-warning" ng-if="post.damage">!</span>
                       <span class="badge badge-pill badge-success" ng-if="!post.damage">R</span>
                       {{post.status}}</td>

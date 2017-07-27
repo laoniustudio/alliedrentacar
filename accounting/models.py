@@ -6,8 +6,8 @@ class Post (models.Model):
 
     contractNumber = models.CharField(max_length=200, blank= True)
     plateNumber = models.CharField(max_length=200,blank= True)
-    dateOutTime = models.CharField(max_length=50)
-    dateInTime = models.CharField(blank=True,null=True,max_length=50)
+    dateOutTime = models.DateTimeField()
+    dateInTime = models.DateTimeField(blank=True,null=True)
     STATUS_CHOICES = (
         ('On Rent', 'On Rent'),
         ('Ready for review', 'Ready for review'),

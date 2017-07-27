@@ -6,12 +6,13 @@ var alliedApp = angular.module('allied',['ngMaterial','ngMessages']);
 
 
 //main controller
-alliedApp.controller("alliedController",function ($scope,$http) {
+alliedApp.controller("alliedController",function ($scope,$http,$filter) {
 
             // get func
             $http.get("/api/get")
                 .then(function (response) {
                     $scope.posts = response.data;
+
                 });
             // // post func
             //  var data = $.param({
@@ -34,20 +35,27 @@ alliedApp.controller("alliedController",function ($scope,$http) {
              * filter
              */
 
-            //date piocker
-              $scope.myDate = "";
-              $scope.isOpen = false;
+            //date picker
+            $scope.changeInOut = function(status) {
+                $scope.searchDate = {};
+                if(status === "Date out"){
+                    $scope.searchStatus = "dateOutTime"
+                }else{
+                    $scope.searchStatus = "dateInTime"
+                }
+            }
+            $scope.changeStatus = function(status) {
+                if(status === "All"){
+                    $scope.searchText = {};
+                }else{
+                    $scope.searchText = status
+                }
+                console.log($scope.searchText);
+            }
+            //convert Mon Jul 24 2017 00:00:00 GMT-0700 (Pacific Daylight Time) to normal date
+            $scope.convertDate = function(selection) {
+                $scope.searchDate[$scope.searchStatus] = $filter('date')(selection, "MM/dd/yyyy");
+            }
 
-
-$scope.change = function(selection) {
-      console.log(selection);
-    if($scope.myStatus=="All"){
-        $scope.searchText = "";
-        console.log("nihao");
-
-    }
-    }
-
-        });
-
+});
 
