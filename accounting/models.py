@@ -1,9 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
 class Post (models.Model):
-
+    username = models.CharField(max_length=200,default="allied")
     contractNumber = models.CharField(max_length=200, blank= True)
     plateNumber = models.CharField(max_length=200,blank= True)
     dateOutTime = models.DateTimeField()

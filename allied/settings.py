@@ -116,6 +116,17 @@ USE_L10N = True
 
 USE_TZ = True
 
+# set login redirect
+LOGIN_URL = 'home'
+
+#emial host
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_PASSWORD = '1314530ab'
+EMAIL_HOST_USER = 'cowtechstudio@gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
@@ -135,5 +146,3 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-
-LOGIN_URL = 'home'

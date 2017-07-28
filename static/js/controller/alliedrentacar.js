@@ -44,18 +44,24 @@ alliedApp.controller("alliedController",function ($scope,$http,$filter) {
                     $scope.searchStatus = "dateInTime"
                 }
             }
+            //status chooser
             $scope.changeStatus = function(status) {
                 if(status === "All"){
                     $scope.searchText = {};
                 }else{
                     $scope.searchText = status
                 }
-                console.log($scope.searchText);
+
             }
             //convert Mon Jul 24 2017 00:00:00 GMT-0700 (Pacific Daylight Time) to normal date
             $scope.convertDate = function(selection) {
                 $scope.searchDate[$scope.searchStatus] = $filter('date')(selection, "MM/dd/yyyy");
-            }
+            };
 
+            $scope.sortBy = function(propertyName) {
+                console.log($scope.propertyName);
+                $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
+                $scope.propertyName = propertyName;
+              };
 });
 

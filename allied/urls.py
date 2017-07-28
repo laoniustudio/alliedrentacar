@@ -17,13 +17,23 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 from .views import homesignin
+from django.contrib.auth.views import password_reset,password_reset_done,password_reset_confirm,password_reset_complete
 from django.conf import settings # only for develop
 from django.conf.urls.static import static,serve# only for develop
+
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',homesignin,name='home'),
     url(r'^dashboard/',include('accounting.urls')),
-    url(r'^api/',include('contentsAPI.urls'))
+    url(r'^api/',include('contentsAPI.urls')),
+
+
+    url(r'^password_reset/$', password_reset,{'template_name': 'accounting/password_reset.html'}, name='password_reset'),
+    url(r'^password_reset/done/$', password_reset_done, name='password_reset_done'),
+    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        password_reset_confirm, name='password_reset_confirm'),
+    url(r'^reset/done/$', password_reset_complete, name='password_reset_complete'),
 
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)# only for develop

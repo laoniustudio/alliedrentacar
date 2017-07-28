@@ -9,23 +9,6 @@
 
 <div class="container" ng-controller="alliedController">
 
-{#            <div class="col-lg-6">#}
-{#    <div class="input-group">#}
-{#        <label for="exampleSelect1">FILTER BY CONTRACT NO.</label>#}
-{#      <input type="text" class="form-control" placeholder="Search for...">#}
-{##}
-{#    </div>#}
-{#  </div>#}
-{##}
-{#            <label for="exampleSelect1">FILTER BY DATE</label>#}
-{#    <select class="form-control" id="exampleSelect1">#}
-{#      <option>1</option>#}
-{#      <option>2</option>#}
-{#      <option>3</option>#}
-{#      <option>4</option>#}
-{#      <option>5</option>#}
-{#    </select>#}
-
     <div  layout-padding ng-cloak>
 
             <md-card-title>
@@ -72,22 +55,34 @@
 
     <table class="table table-hover" >
               <thead>
-                <tr>
-                  <th>CONTRACT NO.</th>
-                  <th>UNIT NO.</th>
-                  <th>USERNMAE</th>
-                  <th>DATE OUT</th>
-                  <th>DATE IN</th>
-                  <th>DATE STATUS</th>
+                <tr >
+                  <th ng-click="sortBy('contractNumber')">CONTRACT NO.
+                      <span class="sortorder" ng-show="propertyName === 'contractNumber'" ng-class="{reverse: reverse}"></span>
+                  </th>
+                  <th ng-click="sortBy('plateNumber')">UNIT NO.
+                  <span class="sortorder" ng-show="propertyName === 'plateNumber'" ng-class="{reverse: reverse}"></span>
+                  </th>
+                  <th ng-click="sortBy('username')">USERNMAE
+                  <span class="sortorder" ng-show="propertyName === 'username'" ng-class="{reverse: reverse}"></span>
+                  </th>
+                  <th ng-click="sortBy('dateOutTime')">DATE OUT
+                  <span class="sortorder" ng-show="propertyName === 'dateOutTime'" ng-class="{reverse: reverse}"></span>
+                  </th>
+                  <th ng-click="sortBy('dateInTime')">DATE IN
+                  <span class="sortorder" ng-show="propertyName === 'dateInTime'" ng-class="{reverse: reverse}"></span>
+                  </th>
+                  <th ng-click="sortBy('status')">DATE STATUS
+                  <span class="sortorder" ng-show="propertyName === 'status'" ng-class="{reverse: reverse}"></span>
+                  </th>
                 </tr>
               </thead>
               <tbody>
               {% verbatim %}
 
-                <tr ng-repeat="post in posts | filter:searchText | filter:searchDate:searchStatus | filter:searchAll" >
+                <tr ng-repeat="post in posts | filter:searchText | filter:searchDate:searchStatus | filter:searchAll |orderBy:propertyName:reverse" >
                   <th>{{post.contractNumber}}</th>
                   <td>{{post.plateNumber}}</td>
-                  <td>{{post.contractNumber}}</td>
+                  <td>{{post.username}}</td>
                   <td>{{post.dateOutTime }}</td>
                   <td>{{post.dateInTime  }}</td>
                   <td><span class="badge badge-pill badge-warning" ng-if="post.damage">!</span>
