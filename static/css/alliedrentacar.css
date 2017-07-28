@@ -43,11 +43,27 @@ table .sortorder.reverse:after {
 
 }
 
-/* reset password toolbar */
+/* reset password */
 md-toolbar.md-default-theme.md-hue-2:not(.md-menu-toolbar), md-toolbar.md-hue-2:not(.md-menu-toolbar) {
     background-color: #4285f4;
     color: #fff;
 }
 .container_password{
-    padding: 4rem 2rem;
+    padding: 3rem 2rem;
+    background-color: white;
 }
+form .password_input{
+    background-color: white;
+  padding: 10px;
+  border: none;
+  border-bottom: solid 1px #c9c9c9;
+  transition: border 0.3s;
+}
+
+form .password_input:focus,
+form .password_input.focus {
+
+  outline: none;
+  border-bottom: solid 1px #969696;
+}
+
