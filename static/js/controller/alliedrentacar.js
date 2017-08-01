@@ -66,5 +66,23 @@ alliedApp.controller("alliedController",function ($scope,$http,$filter) {
 
             // case detailed nav bar
             $scope.currentNavItem = 'page1';
+
+
 });
 
+
+alliedApp.directive('bsWheelzoom', function() {
+  return {
+    link: function(scope, elem, attrs) {
+      wheelzoom(elem[0]);
+    }
+  }
+});
+
+// splite case detail before & after image by ,
+alliedApp.filter('split', function() {
+        return function(input, splitChar, splitIndex) {
+            // do some bounds checking here to ensure it has that index
+            return input.split(splitChar)[splitIndex];
+        }
+});

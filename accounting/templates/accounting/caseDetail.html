@@ -54,8 +54,10 @@
             </div>
 
             <button type="button" class="btn btn-primary btn-block" style="margin-top: 9rem">Export Photos</button>
+
         </div>
     </div>
+
 <!-- for pic selection -->
 
     <md-content class="md-padding">
@@ -66,56 +68,60 @@
           <md-nav-item md-nav-click="goto('page1')" name="{% get_media_prefix%}{{ detail.allImgIn.dashboardImg }},{% get_media_prefix%}{{ detail.allImgOut.dashboardImg }}">
             Dashboard
           </md-nav-item>
-          <md-nav-item md-nav-click="goto('page2')" name="{% get_media_prefix%}{{ detail.allImgIn.frontImg }}">
+          <md-nav-item md-nav-click="goto('page2')" name="{% get_media_prefix%}{{ detail.allImgIn.frontImg }},{% get_media_prefix%}{{ detail.allImgOut.frontImg }}">
             Front
           </md-nav-item>
-          <md-nav-item md-nav-click="goto('page3')" name="{% get_media_prefix%}{{ detail.allImgIn.passFrontImg }}">
+          <md-nav-item md-nav-click="goto('page3')" name="{% get_media_prefix%}{{ detail.allImgIn.passFrontImg }},{% get_media_prefix%}{{ detail.allImgOut.passFrontImg }}">
             Pass Front
           </md-nav-item>
-            <md-nav-item md-nav-click="goto('page4')" name="{% get_media_prefix%}{{ detail.allImgIn.passRearImg }}">
+            <md-nav-item md-nav-click="goto('page4')" name="{% get_media_prefix%}{{ detail.allImgIn.passRearImg }},{% get_media_prefix%}{{ detail.allImgOut.passRearImg }}">
             Pass Rear
           </md-nav-item>
-          <md-nav-item md-nav-click="goto('page5')" name="{% get_media_prefix%}{{ detail.allImgIn.rearImg }}">
+          <md-nav-item md-nav-click="goto('page5')" name="{% get_media_prefix%}{{ detail.allImgIn.rearImg }},{% get_media_prefix%}{{ detail.allImgOut.rearImg }}">
             Rear
           </md-nav-item>
-          <md-nav-item md-nav-click="goto('page6')" name="{% get_media_prefix%}{{ detail.allImgIn.driveRear }}">
+          <md-nav-item md-nav-click="goto('page6')" name="{% get_media_prefix%}{{ detail.allImgIn.driveRear }},{% get_media_prefix%}{{ detail.allImgOut.driveRear }}">
             Driver Rear
           </md-nav-item>
-          <md-nav-item md-nav-click="goto('page6')" name="{% get_media_prefix%}{{ detail.allImgIn.driveFront }}">
-            Driver Rear
+          <md-nav-item md-nav-click="goto('page7')" name="{% get_media_prefix%}{{ detail.allImgIn.driveFront }},{% get_media_prefix%}{{ detail.allImgOut.driveFront }}">
+            Driver Front
           </md-nav-item>
+
+        <!-- more pics -->
+
+        {% for showCount in showCounts %}
+
+
+
+        {% endfor %}
+
+
+
 
         </md-nav-bar>
 
 
     </md-content>
-
-{% verbatim %}
-     <div class="ext-content">
-
-         <img src="{{currentNavItem}}">
-         <img src="{{currentNavItem}}">
-     </div>
-{% endverbatim %}
-
 </div>
+
+
 <!-- Image -->
  <div layout="row" layout-align="center center" ng-cloak>
       <div layout="row" layout-align="end center">
         <img src="{% static 'images/left-arrow.png' %}" class="pointer">
         <md-card>
-          <img src="{% get_media_prefix%}{{ detail.allImgIn.mainImg }}" style="width: 800px;height: 600px" class="imageZoom">
+          <img src="{% verbatim %}{{currentNavItem | split:',':0}}{% endverbatim %}" style="width: 800px;height: 600px" class="imageZoom" class="imageZoom" bswheelzoom >
         </md-card>
       </div>
 
      <div layout="row" layout-align="end center">
         <md-card>
-            <img src="{% get_media_prefix%}{{ detail.allImgIn.mainImg }}" style="width: 800px;height: 600px" class="imageZoom">
+            <img src="{% verbatim %}{{currentNavItem| split:',':1}}{% endverbatim %}" style="width: 800px;height: 600px" class="imageZoom" bswheelzoom>
         </md-card>
             <img src="{% static 'images/left-arrow.png' %}" class="flip pointer">
      </div>
  </div>
 
-</div>
-{% endblock %}
 
+
+{% endblock %}
