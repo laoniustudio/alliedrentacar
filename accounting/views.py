@@ -17,7 +17,7 @@ class CaseList(ListView):
 class CaseListDetail(DetailView):
     model = Post
     template_name = 'accounting/caseDetail.html'
-    context_object_name = 'details'
+    context_object_name = 'detail'
 
 #logout
 @login_required

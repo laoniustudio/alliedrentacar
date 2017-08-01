@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 
+
 {% block reviewport %}
     SHOW CASE
 {% endblock %}
 
 {% block base %}
-
-<div class="container" ng-controller="alliedController">
+<div ng-controller="alliedController">
+<div class="container" >
     <div class="row" style="margin-top: 2rem" ng-cloak>
 
         <div class="card" style="width: 17rem; margin-right: 2rem">
@@ -15,13 +16,12 @@
                  <strong>Case Info</strong>
               </div>
               <div class="card-block" style="line-height: 1rem">
-                <p>Case Number : 265478</p>
+                <p>Contract No. : {{ detail.contractNumber }}</p>
                 <p>Insurance : Yes</p>
-                <p>Date Out : <span><input type="hidden" class="display-millis" value="1498868601526"></span></p>
-                <p>Date In : <span><input type="hidden" class="display-millis" value="1498874212077"></span></p>
-                <p>Status : Ready For Review
-                </p>
-                <p>Unit Number : 305</p>
+                <p>Date Out : {{ detail.dateOutTime|date:"m/d/Y, G:i" }}</p>
+                <p>Date In : {{ detail.dateInTime |date:"m/d/Y, G:i"}}</p>
+                <p>Status : {{ detail.status }}</p>
+                <p>Unit Number : {{ detail.plateNumber }}</p>
 
               </div>
         </div>
@@ -58,37 +58,63 @@
     </div>
 <!-- for pic selection -->
 
-<md-content class="md-padding">
-    <md-nav-bar
-      md-selected-nav-item="currentNavItem"
-      nav-bar-aria-label="navigation links">
-      <md-nav-item md-nav-click="goto('page1')" name="page1">
-        Dashboard
-      </md-nav-item>
-      <md-nav-item md-nav-click="goto('page2')" name="page2">
-        Front
-      </md-nav-item>
-      <md-nav-item md-nav-click="goto('page3')" name="page3">
-        Pass Front
-      </md-nav-item>
-        <md-nav-item md-nav-click="goto('page4')" name="page4">
-        Pass Rear
-      </md-nav-item>
-      <md-nav-item md-nav-click="goto('page5')" name="page5">
-        Rear
-      </md-nav-item>
-      <md-nav-item md-nav-click="goto('page6')" name="page6">
-        Driver Rear
-      </md-nav-item>
+    <md-content class="md-padding">
+        <md-nav-bar
+          md-selected-nav-item="currentNavItem"
+          nav-bar-aria-label="navigation links">
 
-    </md-nav-bar>
-    <div class="ext-content">
-      External content for `<span>{{currentNavItem}}</span>`.
-    </div>
+          <md-nav-item md-nav-click="goto('page1')" name="{% get_media_prefix%}{{ detail.allImgIn.dashboardImg }},{% get_media_prefix%}{{ detail.allImgOut.dashboardImg }}">
+            Dashboard
+          </md-nav-item>
+          <md-nav-item md-nav-click="goto('page2')" name="{% get_media_prefix%}{{ detail.allImgIn.frontImg }}">
+            Front
+          </md-nav-item>
+          <md-nav-item md-nav-click="goto('page3')" name="{% get_media_prefix%}{{ detail.allImgIn.passFrontImg }}">
+            Pass Front
+          </md-nav-item>
+            <md-nav-item md-nav-click="goto('page4')" name="{% get_media_prefix%}{{ detail.allImgIn.passRearImg }}">
+            Pass Rear
+          </md-nav-item>
+          <md-nav-item md-nav-click="goto('page5')" name="{% get_media_prefix%}{{ detail.allImgIn.rearImg }}">
+            Rear
+          </md-nav-item>
+          <md-nav-item md-nav-click="goto('page6')" name="{% get_media_prefix%}{{ detail.allImgIn.driveRear }}">
+            Driver Rear
+          </md-nav-item>
+          <md-nav-item md-nav-click="goto('page6')" name="{% get_media_prefix%}{{ detail.allImgIn.driveFront }}">
+            Driver Rear
+          </md-nav-item>
 
-    <md-checkbox ng-model="disableInkBar">Disable Ink Bar</md-checkbox>
+        </md-nav-bar>
 
-  </md-content>
+
+    </md-content>
+
+{% verbatim %}
+     <div class="ext-content">
+
+         <img src="{{currentNavItem}}">
+         <img src="{{currentNavItem}}">
+     </div>
+{% endverbatim %}
+
+</div>
+<!-- Image -->
+ <div layout="row" layout-align="center center" ng-cloak>
+      <div layout="row" layout-align="end center">
+        <img src="{% static 'images/left-arrow.png' %}" class="pointer">
+        <md-card>
+          <img src="{% get_media_prefix%}{{ detail.allImgIn.mainImg }}" style="width: 800px;height: 600px" class="imageZoom">
+        </md-card>
+      </div>
+
+     <div layout="row" layout-align="end center">
+        <md-card>
+            <img src="{% get_media_prefix%}{{ detail.allImgIn.mainImg }}" style="width: 800px;height: 600px" class="imageZoom">
+        </md-card>
+            <img src="{% static 'images/left-arrow.png' %}" class="flip pointer">
+     </div>
+ </div>
 
 </div>
 {% endblock %}

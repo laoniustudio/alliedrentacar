@@ -65,7 +65,17 @@ form .password_input.focus {
   border-bottom: solid 1px #969696;
 }
 
-.navBardemoBasicUsage md-content .ext-content {
-  padding: 50px;
-  margin: 20px;
-  background-color: #FFF2E0; }
+/* case detail page */
+
+.flip {
+        -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+}
+
+.pointer{
+    cursor:pointer
+}
