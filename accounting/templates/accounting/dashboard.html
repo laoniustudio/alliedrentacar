@@ -7,7 +7,7 @@
 
 {% block base %}
 
-<div class="container" ng-controller="alliedController">
+<div class="container" ng-controller="alliedController" ng-cloak>
 
     <div  layout-padding ng-cloak>
 
@@ -77,10 +77,11 @@
                 </tr>
               </thead>
               <tbody>
+
               {% verbatim %}
 
-                <tr ng-repeat="post in posts | filter:searchText | filter:searchDate:searchStatus | filter:searchAll |orderBy:propertyName:reverse" >
-                  <th>{{post.contractNumber}}</th>
+               <tr ng-repeat="post in posts | filter:searchText | filter:searchDate:searchStatus | filter:searchAll |orderBy:propertyName:reverse" >
+                  <th><a href="{{post.id}}">{{post.contractNumber}}</a></th>
                   <td>{{post.plateNumber}}</td>
                   <td>{{post.username}}</td>
                   <td>{{post.dateOutTime }}</td>

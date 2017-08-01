@@ -1,9 +1,7 @@
 body{
     background-color: #fafafa;
 }
-.jumbotron .alliedheader{
-    background-color: #f5fbff;margin-top: 5rem
-}
+
 
 /* nav background */
 .bg-inverse {
@@ -67,3 +65,7 @@ form .password_input.focus {
   border-bottom: solid 1px #969696;
 }
 
+.navBardemoBasicUsage md-content .ext-content {
+  padding: 50px;
+  margin: 20px;
+  background-color: #FFF2E0; }

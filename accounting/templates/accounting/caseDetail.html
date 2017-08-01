@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block reviewport %}
+    SHOW CASE
+{% endblock %}
+
+{% block base %}
+
+<div class="container" ng-controller="alliedController">
+    <div class="row" style="margin-top: 2rem" ng-cloak>
+
+        <div class="card" style="width: 17rem; margin-right: 2rem">
+             <div class="card-header card-success"  style="color: white">
+                 <strong>Case Info</strong>
+              </div>
+              <div class="card-block" style="line-height: 1rem">
+                <p>Case Number : 265478</p>
+                <p>Insurance : Yes</p>
+                <p>Date Out : <span><input type="hidden" class="display-millis" value="1498868601526"></span></p>
+                <p>Date In : <span><input type="hidden" class="display-millis" value="1498874212077"></span></p>
+                <p>Status : Ready For Review
+                </p>
+                <p>Unit Number : 305</p>
+
+              </div>
+        </div>
+
+        <div class="card" style="width: 37rem;margin-right: 2rem">
+            <div layout="row" style="color: white">
+              <div class="col col-md-8 card-warning" style="padding: .75rem 1.25rem;"><strong>Comments</strong></div>
+              <div class="col col-md-4 card-primary" style="padding: .75rem 1.25rem;"><strong>Save Comments</strong></div>
+
+            </div>
+
+
+            <textarea class="form-control"  style="min-width: 100%; min-height: 84%"></textarea>
+
+        </div>
+
+        <div style="width: 11rem;">
+           <div class="btn-group-vertical">
+                <a href="/case/update?caseNumber=265404&amp;status=2" class="btn btn-success btn-block btn-lg"><strong>Pass</strong></a>
+                <button type="button" class="btn btn-warning dropdown-toggle btn-block" data-toggle="dropdown">
+                    Additional Actions <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a class="dropdown-item" href="/case/update?caseNumber=265404&amp;status=3" onclick="return confirm(&#39;Are you sure that you want to set status of this case to fail ?&#39;)">Fail</a></li>
+                    <li><a class="dropdown-item" href="/case/delete/265404" onclick="return confirm(&#39;Are you sure that you want to delete this case ?&#39;)">Delete</a></li>
+                    <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#movePhotos">Move photos to another car</a></li>
+                    <li><a class="dropdown-item" href="/case/update?caseNumber=265404&amp;status=15" onclick="return confirm(&#39;Are you sure that you want to archive this case ?&#39;)">Archive</a></li>
+                </ul>
+
+            </div>
+
+            <button type="button" class="btn btn-primary btn-block" style="margin-top: 9rem">Export Photos</button>
+        </div>
+    </div>
+<!-- for pic selection -->
+
+<md-content class="md-padding">
+    <md-nav-bar
+      md-selected-nav-item="currentNavItem"
+      nav-bar-aria-label="navigation links">
+      <md-nav-item md-nav-click="goto('page1')" name="page1">
+        Dashboard
+      </md-nav-item>
+      <md-nav-item md-nav-click="goto('page2')" name="page2">
+        Front
+      </md-nav-item>
+      <md-nav-item md-nav-click="goto('page3')" name="page3">
+        Pass Front
+      </md-nav-item>
+        <md-nav-item md-nav-click="goto('page4')" name="page4">
+        Pass Rear
+      </md-nav-item>
+      <md-nav-item md-nav-click="goto('page5')" name="page5">
+        Rear
+      </md-nav-item>
+      <md-nav-item md-nav-click="goto('page6')" name="page6">
+        Driver Rear
+      </md-nav-item>
+
+    </md-nav-bar>
+    <div class="ext-content">
+      External content for `<span>{{currentNavItem}}</span>`.
+    </div>
+
+    <md-checkbox ng-model="disableInkBar">Disable Ink Bar</md-checkbox>
+
+  </md-content>
+
+</div>
+{% endblock %}
+

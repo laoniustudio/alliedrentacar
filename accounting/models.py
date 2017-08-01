@@ -25,8 +25,8 @@ class Post (models.Model):
             return self.plateNumber
 
 
-class AllImage(models.Model):
-    post = models.ForeignKey(Post,related_name='moreImg')
+class AllImageOut(models.Model):
+    post = models.OneToOneField(Post,related_name="allImgOut")
     mainImg = models.ImageField(upload_to="images")
     dashboardImg = models.ImageField(upload_to="images")
     frontImg = models.ImageField(upload_to="images")
@@ -35,4 +35,34 @@ class AllImage(models.Model):
     rearImg = models.ImageField(upload_to="images")
     driveRear = models.ImageField(upload_to="images")
     driveFront = models.ImageField(upload_to="images")
+
+    def __str__(self):
+        return self.post.contractNumber
+
+
+class MoreImageOut(models.Model):
+    post = models.ForeignKey(Post,related_name='moreImgOut')
     moreImage = models.ImageField(upload_to="images")
+    def __str__(self):
+        return self.post.contractNumber
+
+class AllImageIn(models.Model):
+    post = models.OneToOneField(Post,related_name='allImgIn')
+    mainImg = models.ImageField(upload_to="images")
+    dashboardImg = models.ImageField(upload_to="images")
+    frontImg = models.ImageField(upload_to="images")
+    passFrontImg = models.ImageField(upload_to="images")
+    passRearImg = models.ImageField(upload_to="images")
+    rearImg = models.ImageField(upload_to="images")
+    driveRear = models.ImageField(upload_to="images")
+    driveFront = models.ImageField(upload_to="images")
+
+    def __str__(self):
+        return self.post.contractNumber
+
+
+class MoreImageIn(models.Model):
+    post = models.ForeignKey(Post,related_name='moreImgIn')
+    moreImage = models.ImageField(upload_to="images")
+    def __str__(self):
+        return self.post.contractNumber

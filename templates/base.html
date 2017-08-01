@@ -17,7 +17,7 @@
 </head>
 <body>
      <!-- Navigation Start -->
-         <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+         <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon" style="background-image: url({% static 'images/menu.png' %})"></span>
       </button>
@@ -53,28 +53,35 @@
      <!-- Navigation End -->
 
      <!-- Header Start -->
-        <div class="jumbotron alliedheader" >
-          <div class="container">
-            <h1 class="display-5">REVIEW PORTAL - {% block reviewport %}{% endblock %}</h1>
-          </div>
-        </div>
+            <md-content>
+                <md-toolbar class="md-hue-2">
+                  <div class="md-toolbar-tools">
+                      <div class="container">
+                      <h1><strong>REVIEW PORTAL - {% block reviewport %}{% endblock %}</strong></h1>
+                          </div>
+                  </div>
+                </md-toolbar>
+            </md-content>
      <!-- Header End -->
 
-    {% block content %}
-
-    {% endblock %}
 
 
+
+
+        {% block base %}
+
+        {% endblock %}
     <!-- Footer Start -->
-     <hr>
+     <hr ng-cloak>
+     <div class="container" ng-cloak>
+
           <footer>
             <p>&copy; Company 2017</p>
           </footer>
+     </div>
     <!-- Footer End -->
 
-{% block base %}
 
-{% endblock %}
 
 </body>
      <!-- Placed at the end of the document so the pages load faster -->

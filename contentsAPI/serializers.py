@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from accounting.models import Post,AllImage
+from accounting.models import Post,AllImageIn,AllImageOut
 
 class PostSerializer(serializers.ModelSerializer):
     dateOutTime = serializers.DateTimeField(format="%m/%d/%Y")
