@@ -64,8 +64,6 @@ alliedApp.controller("alliedController",function ($scope,$http,$filter) {
                 $scope.propertyName = propertyName;
               };
 
-            // case detailed nav bar
-            $scope.currentNavItem = 'page1';
 
 
 });

@@ -53,51 +53,42 @@
 
             </div>
 
-            <button type="button" class="btn btn-primary btn-block" style="margin-top: 9rem">Export Photos</button>
+            <a href="{% url 'accounting:pdf' detail.id%}"><button type="button" class="btn btn-primary btn-block" style="margin-top: 9rem">Export Photos</button></a>
 
         </div>
     </div>
 
 <!-- for pic selection -->
 
-    <md-content class="md-padding">
+    <md-content class="md-padding" ng-cloak ng-init="currentNavItem='{{ dashboardImgOut }},{{ dashboardImgIn }}'">
         <md-nav-bar
           md-selected-nav-item="currentNavItem"
           nav-bar-aria-label="navigation links">
 
-          <md-nav-item md-nav-click="goto('page1')" name="{% get_media_prefix%}{{ detail.allImgIn.dashboardImg }},{% get_media_prefix%}{{ detail.allImgOut.dashboardImg }}">
+          <md-nav-item md-nav-click="goto('page1')" name="{{ dashboardImgOut }},{{ dashboardImgIn }}">
             Dashboard
           </md-nav-item>
-          <md-nav-item md-nav-click="goto('page2')" name="{% get_media_prefix%}{{ detail.allImgIn.frontImg }},{% get_media_prefix%}{{ detail.allImgOut.frontImg }}">
+          <md-nav-item md-nav-click="goto('page2')" name="{{ frontImgOut }},{{ frontImgIn }}">
             Front
           </md-nav-item>
-          <md-nav-item md-nav-click="goto('page3')" name="{% get_media_prefix%}{{ detail.allImgIn.passFrontImg }},{% get_media_prefix%}{{ detail.allImgOut.passFrontImg }}">
+          <md-nav-item md-nav-click="goto('page3')" name="{{ passFrontImgOut }},{{ passFrontImgIn }}">
             Pass Front
           </md-nav-item>
-            <md-nav-item md-nav-click="goto('page4')" name="{% get_media_prefix%}{{ detail.allImgIn.passRearImg }},{% get_media_prefix%}{{ detail.allImgOut.passRearImg }}">
+            <md-nav-item md-nav-click="goto('page4')" name="{{ passRearImgOut }},{{ passRearImgIn }}">
             Pass Rear
           </md-nav-item>
-          <md-nav-item md-nav-click="goto('page5')" name="{% get_media_prefix%}{{ detail.allImgIn.rearImg }},{% get_media_prefix%}{{ detail.allImgOut.rearImg }}">
+          <md-nav-item md-nav-click="goto('page5')" name="{{ rearImgOut }},{{ rearImgIn }}">
             Rear
           </md-nav-item>
-          <md-nav-item md-nav-click="goto('page6')" name="{% get_media_prefix%}{{ detail.allImgIn.driveRear }},{% get_media_prefix%}{{ detail.allImgOut.driveRear }}">
+          <md-nav-item md-nav-click="goto('page6')" name="{{ driveRearOut }},{{ driveRearIn }}">
             Driver Rear
           </md-nav-item>
-          <md-nav-item md-nav-click="goto('page7')" name="{% get_media_prefix%}{{ detail.allImgIn.driveFront }},{% get_media_prefix%}{{ detail.allImgOut.driveFront }}">
+          <md-nav-item md-nav-click="goto('page7')" name="{{ driveFrontOut }},{{ driveFrontIn }}">
             Driver Front
           </md-nav-item>
 
         <!-- more pics -->
-
-        {% for showCount in showCounts %}
-
-
-
-        {% endfor %}
-
-
-
-
+        {{ content | safe }}
         </md-nav-bar>
 
 

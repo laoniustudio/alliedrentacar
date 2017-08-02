@@ -40,11 +40,14 @@ class AllImageOut(models.Model):
         return self.post.contractNumber
 
 
+
 class MoreImageOut(models.Model):
     post = models.ForeignKey(Post,related_name='moreImgOut')
     moreImage = models.ImageField(upload_to="images")
     def __str__(self):
         return self.post.contractNumber
+
+
 
 class AllImageIn(models.Model):
     post = models.OneToOneField(Post,related_name='allImgIn')
