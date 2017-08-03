@@ -52,7 +52,7 @@ class CaseListDetail(DetailView):
 
         content = ""
         for index in range(utility.counts):
-            page = "goto('page"+str(index+1+7)+"')"
+            page = "goto('"+str(index)+"')"
 
             # as the number of imageOut and imageIn may not equal, so the loop may out of range
             try:

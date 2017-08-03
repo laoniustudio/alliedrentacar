@@ -4,7 +4,7 @@ from django.conf import settings
 # Create your models here.
 
 class Post (models.Model):
-    username = models.CharField(max_length=200,default="allied")
+    username = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,default="Allied")
     contractNumber = models.CharField(max_length=200, blank= True)
     plateNumber = models.CharField(max_length=200,blank= True)
     dateOutTime = models.DateTimeField()
@@ -67,6 +67,9 @@ class AllImageIn(models.Model):
 class MoreImageIn(models.Model):
     post = models.ForeignKey(Post,related_name='moreImgIn')
     moreImage = models.ImageField(upload_to="images")
+    damage = damage = models.BooleanField(default=False)
+
+
     def __str__(self):
         return self.post.contractNumber
 

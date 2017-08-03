@@ -66,25 +66,25 @@
           md-selected-nav-item="currentNavItem"
           nav-bar-aria-label="navigation links">
 
-          <md-nav-item md-nav-click="goto('page1')" name="{{ dashboardImgOut }},{{ dashboardImgIn }}">
+          <md-nav-item md-nav-click="goto('Dashboard')" name="{{ dashboardImgOut }},{{ dashboardImgIn }}">
             Dashboard
           </md-nav-item>
-          <md-nav-item md-nav-click="goto('page2')" name="{{ frontImgOut }},{{ frontImgIn }}">
+          <md-nav-item md-nav-click="goto('Front')" name="{{ frontImgOut }},{{ frontImgIn }}">
             Front
           </md-nav-item>
-          <md-nav-item md-nav-click="goto('page3')" name="{{ passFrontImgOut }},{{ passFrontImgIn }}">
+          <md-nav-item md-nav-click="goto('PassFront')" name="{{ passFrontImgOut }},{{ passFrontImgIn }}">
             Pass Front
           </md-nav-item>
-            <md-nav-item md-nav-click="goto('page4')" name="{{ passRearImgOut }},{{ passRearImgIn }}">
+            <md-nav-item md-nav-click="goto('PassRear')" name="{{ passRearImgOut }},{{ passRearImgIn }}">
             Pass Rear
           </md-nav-item>
-          <md-nav-item md-nav-click="goto('page5')" name="{{ rearImgOut }},{{ rearImgIn }}">
+          <md-nav-item md-nav-click="goto('Rear')" name="{{ rearImgOut }},{{ rearImgIn }}">
             Rear
           </md-nav-item>
-          <md-nav-item md-nav-click="goto('page6')" name="{{ driveRearOut }},{{ driveRearIn }}">
+          <md-nav-item md-nav-click="goto('DriverRear')" name="{{ driveRearOut }},{{ driveRearIn }}">
             Driver Rear
           </md-nav-item>
-          <md-nav-item md-nav-click="goto('page7')" name="{{ driveFrontOut }},{{ driveFrontIn }}">
+          <md-nav-item md-nav-click="goto('DriverFront')" name="{{ driveFrontOut }},{{ driveFrontIn }}">
             Driver Front
           </md-nav-item>
 
@@ -99,17 +99,17 @@
 
 <!-- Image -->
  <div layout="row" layout-align="center center"  ng-cloak >
-      <div layout="row" layout-align="end center">
+      <div layout="row" layout-align="end center" >
         <img src="{% static 'images/left-arrow.png' %}" class="pointer">
         <md-card>
-             <md-checkbox ng-model="currentNavItem" style="margin-left: 1rem; margin-top: 1rem">Damged</md-checkbox>
+             <md-checkbox ng-model="damageCheck1" ng-click="updateDate()" style="margin-left: 1rem; margin-top: 1rem">Damged</md-checkbox>
           <img src="{% verbatim %}{{currentNavItem | split:',':0}}{% endverbatim %}" style="width: 800px;height: 600px" class="imageZoom" class="imageZoom" bswheelzoom >
         </md-card>
       </div>
 
      <div layout="row" layout-align="end center">
         <md-card>
-            <md-checkbox ng-model="ctrl.simulateQuery" style="margin-left: 1rem; margin-top: 1rem">Damged</md-checkbox>
+            <md-checkbox ng-model="damageCheck2" style="margin-left: 1rem; margin-top: 1rem">Damged</md-checkbox>
             <img src="{% verbatim %}{{currentNavItem| split:',':1}}{% endverbatim %}" style="width: 800px;height: 600px" class="imageZoom" bswheelzoom>
         </md-card>
             <img src="{% static 'images/left-arrow.png' %}" class="flip pointer">
