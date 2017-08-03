@@ -7,6 +7,8 @@ from django.contrib.auth import logout
 from django.conf import settings
 from reportlab.pdfgen import canvas
 from django.http import HttpResponse
+from django.utils import formats
+from .utility import CaseDetailExtend
 # Create your views here.
 
 # homepage default view
@@ -23,63 +25,60 @@ class CaseListDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super(CaseListDetail, self).get_context_data(**kwargs)
 
-        moreImgOut= Post.objects.get(pk=self.kwargs.get('pk')).moreImgOut.all()
-        moreImgIn = Post.objects.get(pk=self.kwargs.get('pk')).moreImgIn.all()
-        allImgOut = Post.objects.get(pk=self.kwargs.get('pk')).allImgOut
-        allImgIn = Post.objects.get(pk=self.kwargs.get('pk')).allImgIn
-        mediaUrl = settings.MEDIA_URL
-        staticUrl = settings.STATIC_URL
+        #initial utility
+        utility = CaseDetailExtend(self.kwargs.get('pk'))
+        utility.getImage()
 
         # ----------------------All Image show--------------------------------------#
-        context['dashboardImgOut'] = mediaUrl + str(allImgOut.dashboardImg)
-        context['frontImgOut'] = mediaUrl + str(allImgOut.frontImg)
-        context['passFrontImgOut'] = mediaUrl + str(allImgOut.passFrontImg)
-        context['passRearImgOut'] = mediaUrl + str(allImgOut.passRearImg)
-        context['rearImgOut'] = mediaUrl + str(allImgOut.rearImg)
-        context['driveRearOut'] = mediaUrl + str(allImgOut.driveRear)
-        context['driveFrontOut'] = mediaUrl + str(allImgOut.driveFront)
-        context['dashboardImgIn'] = mediaUrl + str(allImgIn.dashboardImg)
-        context['frontImgIn'] = mediaUrl + str(allImgIn.frontImg)
-        context['passFrontImgIn'] = mediaUrl + str(allImgIn.passFrontImg)
-        context['passRearImgIn'] = mediaUrl + str(allImgIn.passRearImg)
-        context['rearImgIn'] = mediaUrl + str(allImgIn.rearImg)
-        context['driveRearIn'] = mediaUrl + str(allImgIn.driveRear)
-        context['driveFrontIn'] = mediaUrl + str(allImgIn.driveFront)
+        context['dashboardImgOut'] = utility.mediaUrl + str(utility.allImgOut.dashboardImg)
+        context['frontImgOut'] = utility.mediaUrl + str(utility.allImgOut.frontImg)
+        context['passFrontImgOut'] = utility.mediaUrl + str(utility.allImgOut.passFrontImg)
+        context['passRearImgOut'] = utility.mediaUrl + str(utility.allImgOut.passRearImg)
+        context['rearImgOut'] = utility.mediaUrl + str(utility.allImgOut.rearImg)
+        context['driveRearOut'] = utility.mediaUrl + str(utility.allImgOut.driveRear)
+        context['driveFrontOut'] = utility.mediaUrl + str(utility.allImgOut.driveFront)
+        context['dashboardImgIn'] = utility.mediaUrl + str(utility.allImgIn.dashboardImg)
+        context['frontImgIn'] = utility.mediaUrl + str(utility.allImgIn.frontImg)
+        context['passFrontImgIn'] = utility.mediaUrl + str(utility.allImgIn.passFrontImg)
+        context['passRearImgIn'] = utility.mediaUrl + str(utility.allImgIn.passRearImg)
+        context['rearImgIn'] = utility.mediaUrl + str(utility.allImgIn.rearImg)
+        context['driveRearIn'] = utility.mediaUrl + str(utility.allImgIn.driveRear)
+        context['driveFrontIn'] = utility.mediaUrl + str(utility.allImgIn.driveFront)
 
 
 
         #----------------------More Image show--------------------------------------#
         # compare which has more image, and show number with more image
-        if moreImgIn.__len__() > moreImgOut.__len__():
-            counts = moreImgIn.__len__()
-        else:
-            counts = moreImgOut.__len__()
+
         content = ""
-        for index in range(counts):
+        for index in range(utility.counts):
             page = "goto('page"+str(index+1+7)+"')"
 
             # as the number of imageOut and imageIn may not equal, so the loop may out of range
             try:
-                imageOutURL = mediaUrl + str(moreImgOut[index].moreImage)
+                imageOutURL = utility.mediaUrl + str(utility.moreImgOut[index].moreImage)
             except:
-                imageOutURL = staticUrl + "/images/notfound.png"
+                imageOutURL = utility.staticUrl + "images/notfound.png"
             try:
-                imageInURL = mediaUrl + str(moreImgIn[index].moreImage)
+                imageInURL = utility.mediaUrl + str(utility.moreImgIn[index].moreImage)
             except:
-                imageInURL = staticUrl + "/images/notfound.png"
+                imageInURL = utility.staticUrl + "images/notfound.png"
             html = "<md-nav-item md-nav-click=" + page + " name="+imageOutURL+ ","+imageInURL+">O"+str(index+1)+"</md-nav-item>"
             content = content+html
         context['content'] = content
+
+        # ----------------------damage for image show--------------------------------------#
+
 
         return context
 
 
 
 def toPDF(request,pk):
-    moreImgOut = Post.objects.get(pk=pk).moreImgOut.all()
-    moreImgIn = Post.objects.get(pk=pk).moreImgIn.all()
-    allImgOut = Post.objects.get(pk=pk).allImgOut
-    allImgIn = Post.objects.get(pk=pk).allImgIn
+    # initial utility
+    utility = CaseDetailExtend(pk)
+    utility.getImage()
+
     post = Post.objects.get(pk=pk)
 
     # Create the HttpResponse object with the appropriate PDF headers.
@@ -91,12 +90,84 @@ def toPDF(request,pk):
 
     # Draw things on the PDF. Here's where the PDF generation happens.
 
-    image = settings.BASE_DIR+settings.STATIC_URL+"images/logo.png"
-    p.drawImage(image, 150, 700, width=300, height=137, mask=None)
-    p.drawString(100, 600, "Contract No. : "+post.contractNumber)
+    logo = settings.BASE_DIR + utility.staticUrl + "images/logo.png"
+
+    # print all the pages for Rent out
+    imageOutCount = 7 + utility.moreImgOut.__len__()
+    for index in range(imageOutCount):
+        if index == 0:
+            image = settings.BASE_DIR + utility.mediaUrl + str(utility.allImgOut.dashboardImg)
+        elif index == 1:
+            image = settings.BASE_DIR + utility.mediaUrl + str(utility.allImgOut.frontImg)
+        elif index == 2:
+            image = settings.BASE_DIR + utility.mediaUrl + str(utility.allImgOut.passFrontImg)
+        elif index == 3:
+            image = settings.BASE_DIR + utility.mediaUrl + str(utility.allImgOut.passRearImg)
+        elif index == 4:
+            image = settings.BASE_DIR + utility.mediaUrl + str(utility.allImgOut.rearImg)
+        elif index == 5:
+            image = settings.BASE_DIR + utility.mediaUrl + str(utility.allImgOut.driveRear)
+        elif index == 6:
+            image = settings.BASE_DIR + utility.mediaUrl + str(utility.allImgOut.driveFront)
+        else:#more image
+            image = settings.BASE_DIR + utility.mediaUrl + str(utility.moreImgOut[index-7].moreImage)
+
+        # set position name
+        if index<=6:
+            positionNameOut = utility.nameDic[index]
+        else:
+            positionNameOut = "Other"+str(index-6)
+
+        #start print on PDF
+        p.drawImage(logo, 200, 730, width=200, height=91, mask=None)
+        p.drawString(100, 700, "Contract No. : "+post.contractNumber)
+        p.drawString(300, 700, "Date In : " + str(formats.date_format(post.dateInTime,"SHORT_DATETIME_FORMAT")))
+        p.drawString(100, 650, "Unit No. : " + post.plateNumber)
+        p.drawString(300, 650, "Date Out. : " + str(formats.date_format(post.dateOutTime,"SHORT_DATETIME_FORMAT")))
+        p.drawString(200, 580, "Photo Position: "+positionNameOut+"       Before")
+        p.drawImage(image, 50, 180, width=500, height=375, mask=None)
+        p.drawString(100, 150, "Damage:")
+        p.showPage()
+
+    # print all the pages for check in
+    imageInCount = 7 + utility.moreImgIn.__len__()
+    for index in range(imageInCount):
+        if index == 0:
+            image = settings.BASE_DIR + utility.mediaUrl + str(utility.allImgIn.dashboardImg)
+        elif index == 1:
+            image = settings.BASE_DIR + utility.mediaUrl + str(utility.allImgIn.frontImg)
+        elif index == 2:
+            image = settings.BASE_DIR + utility.mediaUrl + str(utility.allImgIn.passFrontImg)
+        elif index == 3:
+            image = settings.BASE_DIR + utility.mediaUrl + str(utility.allImgIn.passRearImg)
+        elif index == 4:
+            image = settings.BASE_DIR + utility.mediaUrl + str(utility.allImgIn.rearImg)
+        elif index == 5:
+            image = settings.BASE_DIR + utility.mediaUrl + str(utility.allImgIn.driveRear)
+        elif index == 6:
+            image = settings.BASE_DIR + utility.mediaUrl + str(utility.allImgIn.driveFront)
+        else:  # more image
+            image = settings.BASE_DIR + utility.mediaUrl + str(utility.moreImgIn[index - 7].moreImage)
+
+        # set position name
+        if index <= 6:
+            positionNameIn = utility.nameDic[index]
+        else:
+            positionNameIn = "Other" + str(index - 6)
+
+        # start print on PDF
+        p.drawImage(logo, 200, 730, width=200, height=91, mask=None)
+        p.drawString(100, 700, "Contract No. : " + post.contractNumber)
+        p.drawString(300, 700, "Date In : " + str(formats.date_format(post.dateInTime, "SHORT_DATETIME_FORMAT")))
+        p.drawString(100, 650, "Unit No. : " + post.plateNumber)
+        p.drawString(300, 650, "Date Out. : " + str(formats.date_format(post.dateOutTime, "SHORT_DATETIME_FORMAT")))
+        p.drawString(200, 580, "Photo Position: " + positionNameIn + "       After")
+        p.drawImage(image, 50, 180, width=500, height=375, mask=None)
+        p.drawString(100, 150, "Damage:")
+        p.showPage()
+
 
     # Close the PDF object cleanly, and we're done.
-    p.showPage()
     p.save()
     return response
 

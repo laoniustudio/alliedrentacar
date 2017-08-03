@@ -99,11 +99,8 @@
     <script src="{% static 'node_modules/angular-material/angular-material.min.js' %}"></script>
     <script src="{% static 'js/controller/alliedrentacar.js' %}"></script>
 
-    <!-- ImageZoom -->
-    <script src="{% static 'js/wheelzoom.js' %}"></script>
-    <script>$(document).ready(function() {
-      // assign wheelzoom
-      wheelzoom(document.querySelectorAll('.imageZoom'));
-    })</script>
 
+    {% block customJS %}
+
+    {% endblock %}
 </html>

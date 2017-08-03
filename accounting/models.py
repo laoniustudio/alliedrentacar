@@ -16,7 +16,7 @@ class Post (models.Model):
         ('Fail', 'Fail'),
     )
     status = models.CharField(max_length=50,choices=STATUS_CHOICES,default='Ready for review')
-    damage =  models.BooleanField(default=False)
+    damage = models.BooleanField(default=False)
 
     def __str__(self):
         if self.contractNumber:
@@ -67,5 +67,18 @@ class AllImageIn(models.Model):
 class MoreImageIn(models.Model):
     post = models.ForeignKey(Post,related_name='moreImgIn')
     moreImage = models.ImageField(upload_to="images")
+    def __str__(self):
+        return self.post.contractNumber
+
+class DamgeOut(models.Model):
+    post = models.OneToOneField(Post,related_name='damgeOut')
+    dashboardImg = models.BooleanField(default=False)
+    frontImg = models.BooleanField(default=False)
+    passFrontImg = models.BooleanField(default=False)
+    passRearImg = models.BooleanField(default=False)
+    rearImg = models.BooleanField(default=False)
+    driveRearImg = models.BooleanField(default=False)
+    driveFrontImg = models.BooleanField(default=False)
+
     def __str__(self):
         return self.post.contractNumber

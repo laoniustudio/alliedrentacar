@@ -7,7 +7,8 @@
 {% endblock %}
 
 {% block base %}
-<div ng-controller="alliedController">
+<div ng-init="casePK='{{ detail.id }}'"></div>
+<div  ng-controller="caseDetailCtl" >
 <div class="container" >
     <div class="row" style="margin-top: 2rem" ng-cloak>
 
@@ -97,16 +98,18 @@
 
 
 <!-- Image -->
- <div layout="row" layout-align="center center" ng-cloak>
+ <div layout="row" layout-align="center center"  ng-cloak >
       <div layout="row" layout-align="end center">
         <img src="{% static 'images/left-arrow.png' %}" class="pointer">
         <md-card>
+             <md-checkbox ng-model="currentNavItem" style="margin-left: 1rem; margin-top: 1rem">Damged</md-checkbox>
           <img src="{% verbatim %}{{currentNavItem | split:',':0}}{% endverbatim %}" style="width: 800px;height: 600px" class="imageZoom" class="imageZoom" bswheelzoom >
         </md-card>
       </div>
 
      <div layout="row" layout-align="end center">
         <md-card>
+            <md-checkbox ng-model="ctrl.simulateQuery" style="margin-left: 1rem; margin-top: 1rem">Damged</md-checkbox>
             <img src="{% verbatim %}{{currentNavItem| split:',':1}}{% endverbatim %}" style="width: 800px;height: 600px" class="imageZoom" bswheelzoom>
         </md-card>
             <img src="{% static 'images/left-arrow.png' %}" class="flip pointer">
@@ -114,5 +117,16 @@
  </div>
 
 
+
+{% endblock %}
+
+{% block customJS %}
+    <!-- ImageZoom -->
+    <script src="{% static 'js/wheelzoom.js' %}"></script>
+    <script>$(document).ready(function() {
+      // assign wheelzoom
+      wheelzoom(document.querySelectorAll('.imageZoom'));
+    })</script>
+     <script src="{% static 'js/controller/caseDetail.js' %}"></script>
 
 {% endblock %}
