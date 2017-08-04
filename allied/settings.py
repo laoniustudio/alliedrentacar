@@ -25,7 +25,7 @@ SECRET_KEY = 'g=f4cr0x*c2=6nv$514&u-wqhv!0=52p6qt19c+o$2=61krmy#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS =  ['floating-refuge-57219.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS =  ['alliedrent.herokuapp.com','127.0.0.1']
 
 # Application definition
 
