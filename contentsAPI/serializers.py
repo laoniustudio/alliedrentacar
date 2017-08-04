@@ -9,19 +9,32 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = '__all__'
+# update post info
+class PostSerializerUpdate(serializers.ModelSerializer):
 
-
+    class Meta:
+        model = Post
+        fields = ['comment']
 
 # all Image in damage
 class ImgInDamageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = DamgeOut
-        fields = ['dashboardImg','frontImg','passFrontImg','passRearImg','rearImg','driveRearImg','driveFrontImg']
+        fields = ['dashboardImg','frontImg','passFrontImg','passRearImg','rearImg','driveRearImg']
 
-# all more image in damage
+
+
+# get all more image in damage
 class ImgInMoreDamageSerializer(serializers.ModelSerializer):
-    moreImgIn = serializers.SlugRelatedField(many=True, read_only=True, slug_field='damage')
+
     class Meta:
-        model = Post
-        fields = ['moreImgIn']
+        model = MoreImageIn
+        fields = ['id','damage']
+
+# update more image in damage
+class ImgInMoreDamageUpdateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = MoreImageIn
+        fields = ['damage']

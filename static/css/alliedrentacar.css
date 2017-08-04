@@ -79,3 +79,12 @@ form .password_input.focus {
 .pointer{
     cursor:pointer
 }
+/* save comment button */
+.md-button.md-raise:not([disabled]){
+    width: 12.5rem;
+    height: 3rem;
+    margin: 0;
+    margin-left: -1rem;
+    color: white;
+}
+

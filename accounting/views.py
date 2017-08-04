@@ -63,7 +63,9 @@ class CaseListDetail(DetailView):
                 imageInURL = utility.mediaUrl + str(utility.moreImgIn[index].moreImage)
             except:
                 imageInURL = utility.staticUrl + "images/notfound.png"
-            html = "<md-nav-item md-nav-click=" + page + " name="+imageOutURL+ ","+imageInURL+">O"+str(index+1)+"</md-nav-item>"
+
+            bindData = "O"+str(index+1)
+            html = "<md-nav-item md-nav-click=" + page + " name="+imageOutURL+ ","+imageInURL+">"+bindData+"<span class='badge badge-pill badge-warning' ng-show="+bindData+" >!</span></md-nav-item>"
             content = content+html
         context['content'] = content
 

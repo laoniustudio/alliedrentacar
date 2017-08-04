@@ -4,7 +4,7 @@ from django.conf import settings
 # Create your models here.
 
 class Post (models.Model):
-    username = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,default="Allied")
+
     contractNumber = models.CharField(max_length=200, blank= True)
     plateNumber = models.CharField(max_length=200,blank= True)
     dateOutTime = models.DateTimeField()
@@ -17,6 +17,7 @@ class Post (models.Model):
     )
     status = models.CharField(max_length=50,choices=STATUS_CHOICES,default='Ready for review')
     damage = models.BooleanField(default=False)
+    comment = models.TextField(blank=True)
 
     def __str__(self):
         if self.contractNumber:
@@ -67,11 +68,11 @@ class AllImageIn(models.Model):
 class MoreImageIn(models.Model):
     post = models.ForeignKey(Post,related_name='moreImgIn')
     moreImage = models.ImageField(upload_to="images")
-    damage = damage = models.BooleanField(default=False)
+    damage = models.BooleanField(default=False)
 
 
     def __str__(self):
-        return self.post.contractNumber
+        return "ContractNo : "+self.post.contractNumber+",ID : "+str(self.id)
 
 class DamgeOut(models.Model):
     post = models.OneToOneField(Post,related_name='damgeOut')

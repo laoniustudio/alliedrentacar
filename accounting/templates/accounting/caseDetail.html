@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block base %}
-<div ng-init="casePK='{{ detail.id }}'"></div>
+<div ng-init="casePK='{{ detail.id }}';comment='{{ detail.comment }}'" ></div>
 <div  ng-controller="caseDetailCtl" >
 <div class="container" >
     <div class="row" style="margin-top: 2rem" ng-cloak>
@@ -29,13 +29,22 @@
 
         <div class="card" style="width: 37rem;margin-right: 2rem">
             <div layout="row" style="color: white">
-              <div class="col col-md-8 card-warning" style="padding: .75rem 1.25rem;"><strong>Comments</strong></div>
-              <div class="col col-md-4 card-primary" style="padding: .75rem 1.25rem;"><strong>Save Comments</strong></div>
+              <div class="col col-md-8 card-warning" style="padding: .75rem 1.25rem;">
+
+                  <div layout="row" layout-sm="column" >
+                    <strong>Comments</strong>
+                      <md-progress-circular  ng-hide="finishUpdate" ng-disabled="finishUpdate" md-diameter="20px" style="margin-left: 1rem"></md-progress-circular>
+                  </div>
+              </div>
+              <div class="col col-md-4 card-primary">
+                  <md-button class="md-raise md-primary" ng-click="updateComment()">Save Comments</md-button>
+
+              </div>
 
             </div>
 
 
-            <textarea class="form-control"  style="min-width: 100%; min-height: 84%"></textarea>
+            <textarea class="form-control"  style="min-width: 100%; min-height: 84%" ng-model="comment">{% verbatim %}{{ comment }}{% endverbatim %}</textarea>
 
         </div>
 
@@ -66,26 +75,26 @@
           md-selected-nav-item="currentNavItem"
           nav-bar-aria-label="navigation links">
 
-          <md-nav-item md-nav-click="goto('Dashboard')" name="{{ dashboardImgOut }},{{ dashboardImgIn }}">
-            Dashboard
+          <md-nav-item md-nav-click="goto('Dashboard')" name="{{ dashboardImgOut }},{{ dashboardImgIn }}" >
+            Dashboard<span class="badge badge-pill badge-warning" ng-show="dashboard" >!</span>
           </md-nav-item>
           <md-nav-item md-nav-click="goto('Front')" name="{{ frontImgOut }},{{ frontImgIn }}">
-            Front
+            Front<span class="badge badge-pill badge-warning" ng-show="front" >!</span>
           </md-nav-item>
           <md-nav-item md-nav-click="goto('PassFront')" name="{{ passFrontImgOut }},{{ passFrontImgIn }}">
-            Pass Front
+            Pass Front<span class="badge badge-pill badge-warning" ng-show="pFront" >!</span>
           </md-nav-item>
             <md-nav-item md-nav-click="goto('PassRear')" name="{{ passRearImgOut }},{{ passRearImgIn }}">
-            Pass Rear
+            Pass Rear<span class="badge badge-pill badge-warning" ng-show="pRear" >!</span>
           </md-nav-item>
           <md-nav-item md-nav-click="goto('Rear')" name="{{ rearImgOut }},{{ rearImgIn }}">
-            Rear
+            Rear<span class="badge badge-pill badge-warning" ng-show="rear" >!</span>
           </md-nav-item>
           <md-nav-item md-nav-click="goto('DriverRear')" name="{{ driveRearOut }},{{ driveRearIn }}">
-            Driver Rear
+            Driver Rear<span class="badge badge-pill badge-warning" ng-show="dRear" >!</span>
           </md-nav-item>
           <md-nav-item md-nav-click="goto('DriverFront')" name="{{ driveFrontOut }},{{ driveFrontIn }}">
-            Driver Front
+            Driver Front<span class="badge badge-pill badge-warning" ng-show="dFront" >!</span>
           </md-nav-item>
 
         <!-- more pics -->
@@ -100,16 +109,16 @@
 <!-- Image -->
  <div layout="row" layout-align="center center"  ng-cloak >
       <div layout="row" layout-align="end center" >
-        <img src="{% static 'images/left-arrow.png' %}" class="pointer">
+        <img src="{% static 'images/left-arrow.png' %}" class="pointer" md-nav-click="goto('Front')">
         <md-card>
-             <md-checkbox ng-model="damageCheck1" ng-click="updateDate()" style="margin-left: 1rem; margin-top: 1rem">Damged</md-checkbox>
+             <md-checkbox ng-model="damageCheck1" style="margin-left: 1rem; margin-top: 1rem">No Damged</md-checkbox>
           <img src="{% verbatim %}{{currentNavItem | split:',':0}}{% endverbatim %}" style="width: 800px;height: 600px" class="imageZoom" class="imageZoom" bswheelzoom >
         </md-card>
       </div>
 
      <div layout="row" layout-align="end center">
         <md-card>
-            <md-checkbox ng-model="damageCheck2" style="margin-left: 1rem; margin-top: 1rem">Damged</md-checkbox>
+            <md-checkbox ng-model="damageCheck2" ng-click="updateDate()" style="margin-left: 1rem; margin-top: 1rem"><span ng-if="damageCheck2">Damged</span><span ng-if="!damageCheck2">No Damged</span></md-checkbox>
             <img src="{% verbatim %}{{currentNavItem| split:',':1}}{% endverbatim %}" style="width: 800px;height: 600px" class="imageZoom" bswheelzoom>
         </md-card>
             <img src="{% static 'images/left-arrow.png' %}" class="flip pointer">
@@ -118,6 +127,10 @@
 
 
 
+
+
+
+</div>
 {% endblock %}
 
 {% block customJS %}
