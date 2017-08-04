@@ -52,7 +52,7 @@ MIDDLEWARE_CLASSES = [
     'whitenoise.middleware.WhiteNoiseMiddleware',# for heroku
 ]
 
-ROOT_URLCONF = 'allied.urls'
+ROOT_URLCONF = 'alliedrent.urls'
 
 TEMPLATES = [
     {
@@ -71,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'allied.wsgi.application'
+WSGI_APPLICATION = 'alliedrent.wsgi.application'
 
 
 # Database
