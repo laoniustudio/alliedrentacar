@@ -1,1 +1,1 @@
-web: gunicorn alliedrent.wsgi
+web: gunicorn allied.wsgi
