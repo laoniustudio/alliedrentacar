@@ -49,6 +49,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',# for heroku
 ]
 
 ROOT_URLCONF = 'allied.urls'
@@ -138,11 +139,11 @@ DATABASES['default'].update(db_from_env)
 #
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, "static"),
+        os.path.join(PROJECT_ROOT, "static"),
     ]
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_ROOT = os.path.join(PROJECT_ROOT, "staticfiles")
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
