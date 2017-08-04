@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c8629f4b-fce1-45d7-8c12-43bc9198a1ad" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/accounting/models.py" afterPath="$PROJECT_DIR$/accounting/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/accounting/templates/accounting/caseDetail.html" afterPath="$PROJECT_DIR$/accounting/templates/accounting/caseDetail.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/accounting/views.py" afterPath="$PROJECT_DIR$/accounting/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/allied/settings.py" afterPath="$PROJECT_DIR$/allied/settings.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/allied/urls.py" afterPath="$PROJECT_DIR$/allied/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/allied/wsgi.py" afterPath="$PROJECT_DIR$/allied/wsgi.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contentsAPI/serializers.py" afterPath="$PROJECT_DIR$/contentsAPI/serializers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contentsAPI/urls.py" afterPath="$PROJECT_DIR$/contentsAPI/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contentsAPI/views.py" afterPath="$PROJECT_DIR$/contentsAPI/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/alliedrentacar.css" afterPath="$PROJECT_DIR$/static/css/alliedrentacar.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/controller/alliedrentacar.js" afterPath="$PROJECT_DIR$/static/js/controller/alliedrentacar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/controller/caseDetail.js" afterPath="$PROJECT_DIR$/static/js/controller/caseDetail.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -64,7 +50,7 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/allied/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1246">
+            <state relative-caret-position="672">
               <caret line="146" column="0" lean-forward="false" selection-start-line="146" selection-start-column="0" selection-end-line="146" selection-end-column="0" />
               <folding />
             </state>
@@ -96,8 +82,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/allied/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="445">
-              <caret line="38" column="2" lean-forward="false" selection-start-line="38" selection-start-column="2" selection-end-line="38" selection-end-column="2" />
+            <state relative-caret-position="634">
+              <caret line="45" column="7" lean-forward="false" selection-start-line="40" selection-start-column="2" selection-end-line="45" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -1015,22 +1001,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/allied/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1246">
-          <caret line="146" column="0" lean-forward="false" selection-start-line="146" selection-start-column="0" selection-end-line="146" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/allied/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="17" column="59" lean-forward="false" selection-start-line="17" selection-start-column="59" selection-end-line="17" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/contentsAPI/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="678">
@@ -1051,10 +1021,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/allied/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="672">
+          <caret line="146" column="0" lean-forward="false" selection-start-line="146" selection-start-column="0" selection-end-line="146" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/allied/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="17" column="59" lean-forward="false" selection-start-line="17" selection-start-column="59" selection-end-line="17" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/allied/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="38" column="2" lean-forward="false" selection-start-line="38" selection-start-column="2" selection-end-line="38" selection-end-column="2" />
+        <state relative-caret-position="634">
+          <caret line="45" column="7" lean-forward="false" selection-start-line="40" selection-start-column="2" selection-end-line="45" selection-end-column="7" />
           <folding />
         </state>
       </provider>
