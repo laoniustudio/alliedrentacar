@@ -10,6 +10,4 @@ urlpatterns = [
     url(r'^logout$',logout_view,name='logout'),
     url(r'^(?P<pk>\d+)$',CaseListDetail.as_view(),name='casedetail'),
     url(r'^(?P<pk>\d+)/toPDF/$', toPDF, name='pdf'),
-
-
 ]
