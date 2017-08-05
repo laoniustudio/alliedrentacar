@@ -2,8 +2,36 @@
  * Created by sun on 8/2/2017.
  */
 
-alliedApp.controller("caseDetailCtl",function ($scope,$http,$filter,$window) {
+alliedApp.controller("caseDetailCtl",function ($scope,$http,$filter,$window,$interval,$mdToast,shareInfo,$timeout) {
 
+
+                $scope.showCustomToast = function(msg) {
+                    shareInfo.addInfo(msg);// pass data to share info
+                    $mdToast.show({
+                      hideDelay   : 5000,
+                      position    : 'top right',
+                      controller  : 'ToastCtl',
+                      templateUrl : 'toast-template'
+                    });
+                  };
+
+
+                // $scope.number = 15
+                // var stop;
+                // $scope.finishUpdate = false;
+                // $scope.loadingBar = function() {
+                //
+                // stop = $interval(function() {
+                //     if ($scope.number<1){
+                //         $interval.cancel(stop)
+                //         $scope.finishUpdate = true;
+                //     }else {
+                //         $scope.number =$scope.number -1
+                //     }
+                //     console.info($scope.number)
+                //   }, 100);
+                //
+                // }
                 //get all image damage info
                 $scope.getDamageInfo = function (number) {
                     $http.get("/api/alldamage/"+$scope.casePK)
@@ -110,38 +138,45 @@ alliedApp.controller("caseDetailCtl",function ($scope,$http,$filter,$window) {
 
                 // click the nav bar button function
                 $scope.goto=function (msg) {
+
                     $scope.selection = msg;
                     if($scope.selection === "Dashboard"){
                         $scope.damageCheck2 = $scope.allDamage.dashboardImg
                         $scope.damageInUpdate = "dashboardImg"
+                        $scope.navCounter = 0
 
 
                     }else if ($scope.selection === "Front"){
                         $scope.damageCheck2 = $scope.allDamage.frontImg
                         $scope.damageInUpdate = "frontImg"
-
+                        $scope.navCounter = 1
 
                     }
                     else if ($scope.selection === "PassFront"){
                         $scope.damageCheck2 = $scope.allDamage.passFrontImg
                         $scope.damageInUpdate = "passFrontImg"
-
+                        $scope.navCounter = 2
                     }
                     else if ($scope.selection === "PassRear"){
                         $scope.damageCheck2 = $scope.allDamage.passRearImg
                         $scope.damageInUpdate = "passRearImg"
+                        $scope.navCounter = 3
                     }
                     else if ($scope.selection === "Rear"){
                         $scope.damageCheck2 = $scope.allDamage.rearImg
                         $scope.damageInUpdate = "rearImg"
+                        $scope.navCounter = 4
+
                     }
                     else if ($scope.selection === "DriverRear"){
                         $scope.damageCheck2 = $scope.allDamage.driveRearImg
                         $scope.damageInUpdate = "driveRearImg"
+                        $scope.navCounter = 5
                     }
                     else if ($scope.selection === "DriverFront"){
                         $scope.damageCheck2 = $scope.allDamage.driveFrontImg
                         $scope.damageInUpdate = "driveFrontImg"
+                        $scope.navCounter = 6
                     }else {
                         for ( var i = 0; i < $scope.moreDamage.length; i++ ) {
 
@@ -150,6 +185,7 @@ alliedApp.controller("caseDetailCtl",function ($scope,$http,$filter,$window) {
                                 $scope.damageInUpdate = "damage"
                                 $scope.damageInUpdateID = $scope.moreDamage[i]['id']
                                 $scope.moreImgName = "O"+(i+1)
+                                $scope.navCounter = i+7
 
                                 break
 
@@ -158,13 +194,14 @@ alliedApp.controller("caseDetailCtl",function ($scope,$http,$filter,$window) {
                     }
                 };
                 //save comment
-                $scope.finishUpdate = true; //hide loading circle
-                $scope.updateComment = function () {
-                    $scope.finishUpdate = false;
+                $scope.saveComment = "Save Comment"
+                $scope.updateInfo = function () {
+
+                    $scope.saveComment = "Saving..."
+                    $scope.commentDisable =true
                     var params = {
                         "comment": $scope.comment
                     };
-
                     var config = {
                         params: params
                     };
@@ -172,10 +209,91 @@ alliedApp.controller("caseDetailCtl",function ($scope,$http,$filter,$window) {
 
                     $http.put(updateURL, params, config)
                         .then(function (sucess) {
-                            $scope.finishUpdate = true;
-                            console.info(sucess)
+
+                            $scope.saveComment = "Saved"
+                            $scope.commentDisable = false
+
                         })
                 }
+
+                $scope.navCounter = 0
+
+                $scope.nextButton = function (msg) {
+                    $timeout(function () {
+
+                        console.info($scope.navCounter)
+                        if(msg == "after"){
+                            if($scope.navCounter<$scope.moreDamage.length+6){
+                                $scope.navCounter += 1
+                            var id = "n"+ $scope.navCounter
+                            }
+
+
+                        }else {
+                            if ($scope.navCounter >=1){
+                                $scope.navCounter = $scope.navCounter-1
+                                var id = "n"+ $scope.navCounter
+
+                            }
+                        }
+
+                        var el = document.getElementById(id).children;
+                        angular.element(el).triggerHandler('click');
+
+                    }, 0);
+                }
+
+
+
+});
+
+// toast template controller
+alliedApp.controller('ToastCtl', function($scope, shareInfo,$http,$mdToast) {
+    // get shared data
+    $scope.toastStatus = shareInfo.getInfo();
+
+    //update satatus
+    $scope.updateStatus = function() {
+            $scope.closeToast()
+        if ($scope.toastStatus=="DELETE") {
+
+            var params = {
+                "status": $scope.statusName
+            };
+
+            var config = {
+                params: params
+            };
+            $http.delete("/api/post/" + $scope.casePK + "/delete", params, config)
+                .then(function (sucess) {
+                    console.info(sucess)
+                })
+        }else {
+                 if($scope.toastStatus=="PASS"){
+            $scope.statusName = "Pass"
+          }else if($scope.toastStatus=="FAIL"){
+              $scope.statusName = "Fail"
+          }
+          var params = {
+                "status": $scope.statusName
+            };
+
+            var config = {
+                params: params
+            };
+            $http.put("/api/post/"+$scope.casePK+"/update", params, config)
+                .then(function (sucess) {
+
+                })
+        }
+
+      };
+
+    // close Toast
+    $scope.closeToast = function() {
+                    $mdToast.hide()
+                  };
+
 
 });
 
@@ -195,3 +313,22 @@ alliedApp.filter('split', function() {
             return input.split(splitChar)[splitIndex];
         }
 });
+
+// service to share data between caseDetailCtl and toast controllers
+alliedApp.service('shareInfo', function() {
+     var info = "";
+
+      var addInfo = function(msg) {
+          info = msg;
+      };
+
+      var getInfo = function(){
+          return info;
+      };
+
+      return {
+        addInfo: addInfo,
+        getInfo: getInfo
+      };
+})
+

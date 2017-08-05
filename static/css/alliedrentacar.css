@@ -87,4 +87,11 @@ form .password_input.focus {
     margin-left: -1rem;
     color: white;
 }
+.md-button.md-raise:disabled{
+    width: 12.5rem;
+    height: 3rem;
+    margin: 0;
+    margin-left: -1rem;
+    color: white;
+}
 

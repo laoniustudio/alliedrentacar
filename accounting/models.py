@@ -1,10 +1,10 @@
 from django.db import models
 from django.conf import settings
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Post (models.Model):
-
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     contractNumber = models.CharField(max_length=200, blank= True)
     plateNumber = models.CharField(max_length=200,blank= True)
     dateOutTime = models.DateTimeField()
@@ -74,7 +74,7 @@ class MoreImageIn(models.Model):
     def __str__(self):
         return "ContractNo : "+self.post.contractNumber+",ID : "+str(self.id)
 
-class DamgeOut(models.Model):
+class DamageIn(models.Model):
     post = models.OneToOneField(Post,related_name='damgeOut')
     dashboardImg = models.BooleanField(default=False)
     frontImg = models.BooleanField(default=False)
@@ -86,3 +86,5 @@ class DamgeOut(models.Model):
 
     def __str__(self):
         return self.post.contractNumber
+
+# register with email link

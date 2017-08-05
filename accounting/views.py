@@ -9,6 +9,7 @@ from reportlab.pdfgen import canvas
 from django.http import HttpResponse
 from django.utils import formats
 from .utility import CaseDetailExtend
+from django.views.generic.base import TemplateView
 # Create your views here.
 
 # homepage default view
@@ -65,7 +66,8 @@ class CaseListDetail(DetailView):
                 imageInURL = utility.staticUrl + "images/notfound.png"
 
             bindData = "O"+str(index+1)
-            html = "<md-nav-item md-nav-click=" + page + " name="+imageOutURL+ ","+imageInURL+">"+bindData+"<span class='badge badge-pill badge-warning' ng-show="+bindData+" >!</span></md-nav-item>"
+            idName = "n"+str(index+7)
+            html = "<md-nav-item md-nav-click=" + page + " id="+idName+" name="+imageOutURL+ ","+imageInURL+">"+bindData+"<span class='badge badge-pill badge-warning' ng-show="+bindData+" >!</span></md-nav-item>"
             content = content+html
         context['content'] = content
 
@@ -180,3 +182,6 @@ def logout_view(request):
     logout(request)
     return redirect('home')
 
+# show toast template
+class ToastShow(TemplateView):
+    template_name = 'accounting/toast-template.html'

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from accounting.models import Post,DamgeOut,MoreImageIn
+from accounting.models import Post,DamageIn,MoreImageIn
 
 
 # all case
@@ -9,18 +9,18 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = '__all__'
-# update post info
+# update post comment
 class PostSerializerUpdate(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ['comment']
+        fields = ['status','comment']
 
 # all Image in damage
 class ImgInDamageSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = DamgeOut
+        model = DamageIn
         fields = ['dashboardImg','frontImg','passFrontImg','passRearImg','rearImg','driveRearImg']
 
 

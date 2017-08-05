@@ -9,6 +9,9 @@
 {% block base %}
 <div ng-init="casePK='{{ detail.id }}';comment='{{ detail.comment }}'" ></div>
 <div  ng-controller="caseDetailCtl" >
+
+{#     <md-progress-linear ng-hide="finishUpdate" ng-disabled="finishUpdate" md-mode="indeterminate" class="md-warn"></md-progress-linear>#}
+
 <div class="container" >
     <div class="row" style="margin-top: 2rem" ng-cloak>
 
@@ -28,16 +31,18 @@
         </div>
 
         <div class="card" style="width: 37rem;margin-right: 2rem">
+
             <div layout="row" style="color: white">
               <div class="col col-md-8 card-warning" style="padding: .75rem 1.25rem;">
 
-                  <div layout="row" layout-sm="column" >
+
                     <strong>Comments</strong>
-                      <md-progress-circular  ng-hide="finishUpdate" ng-disabled="finishUpdate" md-diameter="20px" style="margin-left: 1rem"></md-progress-circular>
-                  </div>
+
+
               </div>
               <div class="col col-md-4 card-primary">
-                  <md-button class="md-raise md-primary" ng-click="updateComment()">Save Comments</md-button>
+
+                  <md-button class="md-raise md-primary"  ng-disabled="commentDisable" ng-click="updateInfo()">{% verbatim %}{{ saveComment }}{% endverbatim %}</md-button>
 
               </div>
 
@@ -50,15 +55,15 @@
 
         <div style="width: 11rem;">
            <div class="btn-group-vertical">
-                <a href="/case/update?caseNumber=265404&amp;status=2" class="btn btn-success btn-block btn-lg"><strong>Pass</strong></a>
+               <button class="btn btn-success btn-block btn-lg" ng-click="showCustomToast('PASS')"><strong>Pass</strong></button>
                 <button type="button" class="btn btn-warning dropdown-toggle btn-block" data-toggle="dropdown">
                     Additional Actions <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a class="dropdown-item" href="/case/update?caseNumber=265404&amp;status=3" onclick="return confirm(&#39;Are you sure that you want to set status of this case to fail ?&#39;)">Fail</a></li>
-                    <li><a class="dropdown-item" href="/case/delete/265404" onclick="return confirm(&#39;Are you sure that you want to delete this case ?&#39;)">Delete</a></li>
-                    <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#movePhotos">Move photos to another car</a></li>
-                    <li><a class="dropdown-item" href="/case/update?caseNumber=265404&amp;status=15" onclick="return confirm(&#39;Are you sure that you want to archive this case ?&#39;)">Archive</a></li>
+                    <li><a class="dropdown-item" href="#" ng-click="showCustomToast('FAIL')">Fail</a></li>
+                    <li><a class="dropdown-item" href="#" ng-click="showCustomToast('DELETE')">Delete</a></li>
+                    <li><a class="dropdown-item" href="#" ng-click="showCustomToast('pass')">Move photos to another car</a></li>
+
                 </ul>
 
             </div>
@@ -75,25 +80,25 @@
           md-selected-nav-item="currentNavItem"
           nav-bar-aria-label="navigation links">
 
-          <md-nav-item md-nav-click="goto('Dashboard')" name="{{ dashboardImgOut }},{{ dashboardImgIn }}" >
+          <md-nav-item  md-nav-click="goto('Dashboard')" id="n0" name="{{ dashboardImgOut }},{{ dashboardImgIn }}" >
             Dashboard<span class="badge badge-pill badge-warning" ng-show="dashboard" >!</span>
           </md-nav-item>
-          <md-nav-item md-nav-click="goto('Front')" name="{{ frontImgOut }},{{ frontImgIn }}">
+          <md-nav-item  md-nav-click="goto('Front')" id="n1" name="{{ frontImgOut }},{{ frontImgIn }}">
             Front<span class="badge badge-pill badge-warning" ng-show="front" >!</span>
           </md-nav-item>
-          <md-nav-item md-nav-click="goto('PassFront')" name="{{ passFrontImgOut }},{{ passFrontImgIn }}">
+          <md-nav-item  md-nav-click="goto('PassFront')" id="n2" name="{{ passFrontImgOut }},{{ passFrontImgIn }}">
             Pass Front<span class="badge badge-pill badge-warning" ng-show="pFront" >!</span>
           </md-nav-item>
-            <md-nav-item md-nav-click="goto('PassRear')" name="{{ passRearImgOut }},{{ passRearImgIn }}">
+            <md-nav-item md-nav-click="goto('PassRear')" id="n3" name="{{ passRearImgOut }},{{ passRearImgIn }}">
             Pass Rear<span class="badge badge-pill badge-warning" ng-show="pRear" >!</span>
           </md-nav-item>
-          <md-nav-item md-nav-click="goto('Rear')" name="{{ rearImgOut }},{{ rearImgIn }}">
+          <md-nav-item md-nav-click="goto('Rear')" id="n4" name="{{ rearImgOut }},{{ rearImgIn }} " >
             Rear<span class="badge badge-pill badge-warning" ng-show="rear" >!</span>
           </md-nav-item>
-          <md-nav-item md-nav-click="goto('DriverRear')" name="{{ driveRearOut }},{{ driveRearIn }}">
+          <md-nav-item  md-nav-click="goto('DriverRear')" id="n5" name="{{ driveRearOut }},{{ driveRearIn }}">
             Driver Rear<span class="badge badge-pill badge-warning" ng-show="dRear" >!</span>
           </md-nav-item>
-          <md-nav-item md-nav-click="goto('DriverFront')" name="{{ driveFrontOut }},{{ driveFrontIn }}">
+          <md-nav-item md-nav-click="goto('DriverFront')" id="n6" name="{{ driveFrontOut }},{{ driveFrontIn }}">
             Driver Front<span class="badge badge-pill badge-warning" ng-show="dFront" >!</span>
           </md-nav-item>
 
@@ -109,19 +114,19 @@
 <!-- Image -->
  <div layout="row" layout-align="center center"  ng-cloak >
       <div layout="row" layout-align="end center" >
-        <img src="{% static 'images/left-arrow.png' %}" class="pointer" md-nav-click="goto('Front')">
+        <img src="{% static 'images/left-arrow.png' %}" class="pointer" ng-click="nextButton('before')">
         <md-card>
-             <md-checkbox ng-model="damageCheck1" style="margin-left: 1rem; margin-top: 1rem">No Damged</md-checkbox>
+             <md-checkbox ng-model="damageCheck1" style="margin-left: 1rem; margin-top: 1rem;color:#6D5CAE">No Damged</md-checkbox>
           <img src="{% verbatim %}{{currentNavItem | split:',':0}}{% endverbatim %}" style="width: 800px;height: 600px" class="imageZoom" class="imageZoom" bswheelzoom >
         </md-card>
       </div>
 
      <div layout="row" layout-align="end center">
         <md-card>
-            <md-checkbox ng-model="damageCheck2" ng-click="updateDate()" style="margin-left: 1rem; margin-top: 1rem"><span ng-if="damageCheck2">Damged</span><span ng-if="!damageCheck2">No Damged</span></md-checkbox>
+            <md-checkbox ng-model="damageCheck2" ng-click="updateDate()" style="margin-left: 1rem; margin-top: 1rem;color:#6D5CAE"><span ng-if="damageCheck2">Damged</span><span ng-if="!damageCheck2">No Damged</span></md-checkbox>
             <img src="{% verbatim %}{{currentNavItem| split:',':1}}{% endverbatim %}" style="width: 800px;height: 600px" class="imageZoom" bswheelzoom>
         </md-card>
-            <img src="{% static 'images/left-arrow.png' %}" class="flip pointer">
+            <img src="{% static 'images/left-arrow.png' %}" class="flip pointer" ng-click="nextButton('after')">
      </div>
  </div>
 

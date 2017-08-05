@@ -2,7 +2,7 @@ from django.shortcuts import render,get_object_or_404
 from rest_framework import generics
 from rest_framework.viewsets import ModelViewSet
 from .serializers import PostSerializer,ImgInMoreDamageSerializer,ImgInDamageSerializer,ImgInMoreDamageUpdateSerializer,PostSerializerUpdate
-from accounting.models import Post, DamgeOut,MoreImageIn
+from accounting.models import Post, DamageIn,MoreImageIn
 # Create your views here.
 class MultipleFieldLookupMixin(object):
     """
@@ -33,11 +33,15 @@ class PostAPIViewUpdate(generics.RetrieveUpdateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializerUpdate
 
+#delete case
+class PostAPIViewDelete(generics.DestroyAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializerUpdate
 
 # get and update all image in damage info
 class DamageInDetailAPIGetUpdate(generics.RetrieveUpdateAPIView):
     serializer_class = ImgInDamageSerializer
-    queryset = DamgeOut.objects.all()
+    queryset = DamageIn.objects.all()
     lookup_field = 'post'
 
 # get more image in damage info
