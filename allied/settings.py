@@ -82,16 +82,16 @@ TEMPLATES = [
 ]
 # `allauth`
 AUTHENTICATION_BACKENDS = (
-    # Needed to login by username in Django admin, regardless of `allauth`
-
-
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
 
 )
+# `allauth`
 ACCOUNT_AUTHENTICATION_METHOD ='email'
 ACCOUNT_EMAIL_REQUIRED=True
 ACCOUNT_ADAPTER = 'invitations.models.InvitationsAdapter'
+INVITATIONS_INVITATION_ONLY=True
+INVITATIONS_SIGNUP_REDIRECT ='signup'
 
 
 WSGI_APPLICATION = 'allied.wsgi.application'

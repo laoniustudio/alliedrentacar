@@ -16,8 +16,8 @@
 
 </head>
 <body>
-
-
+<div id="wrap">
+    <div id="main">
      <!-- Navigation Start -->
          <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,7 @@
                       <span>Welcome, David Sun</span></a>
                 </li>
                 <li class="nav-item font-weight-bold">
-                  <a class="nav-link" href="#"><img src="{% static 'images/users.png' %}">
+                  <a class="nav-link" href="{% url 'accounting:users' %}"><img src="{% static 'images/users.png' %}">
                       <span>Users</span></a>
                 </li>
                 <li class="nav-item font-weight-bold">
@@ -73,14 +73,18 @@
         {% block base %}
 
         {% endblock %}
+    </div>
+</div>
     <!-- Footer Start -->
-     <hr ng-cloak>
-     <div class="container" ng-cloak>
+    <footer class="c-footer">
+         <hr ng-cloak>
+         <div class="container" ng-cloak>
 
-          <footer>
-            <p>&copy; Company 2017</p>
-          </footer>
-     </div>
+
+                  <p>&copy; Company 2017</p>
+
+         </div>
+    </footer>
     <!-- Footer End -->
 
 

@@ -12,7 +12,7 @@
             <a href="{% url 'accounting:users' %}"><button class="btn btn-sm c-btn md-whiteframe-2dp marginRight-3" style="width: 80%">
                 ADD INVITATION
             </button></a>
-            <a href="{% url 'sendInvite' %}">
+            <a href="{% url 'invitations:send-invite' %}">
                 <img src="{% static 'images/list.png' %}">
             <button class="btn btn-sm c-btn md-whiteframe-2dp" style="width: 80%">
                INVITATION LIST
@@ -33,24 +33,19 @@
 
                 {% if form.errors %}
                     {% if success_message %}
-                         success_message
+                         <span style="float: right;margin-top: 1rem;color:#0aa699 ">
+                            Email has been send!
+                        </span>
                     {% else %}
-                        <span style="float: right;margin-top: 1rem;color:#99a7b9 ">
+                        <span style="float: right;margin-top: 1rem;color:#a94442 ">
                             This e-mail address has already been invited or can not send to the address !
                         </span>
                     {% endif %}
                 {% endif %}
-
-
-
-
       </form>
 
      </md-card></div>
 {% endblock %}
 
-{% block inviteCustomJS %}
-
-{% endblock %}
 
 

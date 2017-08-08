@@ -16,9 +16,8 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
-from .views import homesignin
+from .views import homesignin,signup
 from django.contrib.auth.views import password_reset,password_reset_done,password_reset_confirm,password_reset_complete
-from invitations.views import SendInvite
 from django.conf import settings # only for develop
 from django.conf.urls.static import static,serve# only for develop
 
@@ -26,13 +25,14 @@ from django.conf.urls.static import static,serve# only for develop
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',homesignin,name='home'),
-    url(r'^$',homesignin,name='home'),
     url(r'^dashboard/',include('accounting.urls')),
     url(r'^api/',include('contentsAPI.urls')),
 
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^signup/$', signup,name='signup'),
     url(r'^invitations/', include('invitations.urls', namespace='invitations')),
-    url(r'^invitations/', SendInvite.as_view(),name='sendInvite'),
+
+
 
 
     url(r'^password_reset/$', password_reset, name='password_reset'),
