@@ -38,7 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounting.apps.AccountingConfig',
     'rest_framework',
+    # `allauth`
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'invitations',
 ]
+# `allauth`
+SITE_ID = 1
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -66,10 +73,26 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # `allauth` needs this from django
+                'django.template.context_processors.request',
             ],
         },
     },
 ]
+# `allauth`
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+
+)
+ACCOUNT_AUTHENTICATION_METHOD ='email'
+ACCOUNT_EMAIL_REQUIRED=True
+ACCOUNT_ADAPTER = 'invitations.models.InvitationsAdapter'
+
 
 WSGI_APPLICATION = 'allied.wsgi.application'
 

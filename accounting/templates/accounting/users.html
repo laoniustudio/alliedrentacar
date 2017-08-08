@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block reviewport %}
+
+    USERS LIST
+
+{% endblock %}
+
+{% block base %}
+
+<div class="container" ng-controller="usersCtl" ng-cloak>
+
+    <md-card>
+        <div class="md-toolbar-tools">
+            <img src="{% static 'images/plus.png' %}">
+            <a href="{% url 'sendInvite' %}"><md-button class="md-raised marginRight-3" >
+                Add Invitation
+            </md-button></a>
+                <img src="{% static 'images/list.png' %}">
+            <md-button class="md-raised " >
+               Invitation List
+            </md-button>
+
+        </div>
+    </md-card>
+    <table class="table table-hover" >
+              <thead>
+                <tr >
+                  <th ng-click="sortBy('username')">USERNAME
+                      <span class="sortorder" ng-show="propertyName === 'username'" ng-class="{reverse: reverse}"></span>
+                  </th>
+                  <th ng-click="sortBy('email')">EMAIL
+                  <span class="sortorder" ng-show="propertyName === 'email'" ng-class="{reverse: reverse}"></span>
+                  </th>
+                  <th ng-click="sortBy('first_name')">FIRST NAME
+                  <span class="sortorder" ng-show="propertyName === 'first_name'" ng-class="{reverse: reverse}"></span>
+                  </th>
+                  <th ng-click="sortBy('groups')">ROLE
+                  <span class="sortorder" ng-show="propertyName === 'groups'" ng-class="{reverse: reverse}"></span>
+                  </th>
+                  <th ng-click="sortBy('date_joined')">DATE CREATED
+                  <span class="sortorder" ng-show="propertyName === 'date_joined'" ng-class="{reverse: reverse}"></span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+
+              {% verbatim %}
+
+               <tr ng-repeat="user in users |orderBy:propertyName:reverse" >
+                  <th><a href="{{user.id}}">{{user.username}}</a></th>
+                  <td>{{user.email}}</td>
+                  <td>{{user.first_name}}</td>
+                  <td>{{user.groups}}</td>
+                  <td>{{user.date_joined | date:'MM/dd/yyyy'}}</td>
+                </tr>
+              {% endverbatim %}
+              </tbody>
+    </table>
+
+
+
+</div>
+{% endblock %}
+
+{% block customJS %}
+     <script src="{% static 'js/controller/users.js' %}"></script>
+{% endblock %}
+

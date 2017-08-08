@@ -55,7 +55,6 @@ alliedApp.controller("caseListCtl",function ($scope,$http,$filter) {
             };
 
             $scope.sortBy = function(propertyName) {
-                console.log($scope.propertyName);
                 $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
                 $scope.propertyName = propertyName;
               };

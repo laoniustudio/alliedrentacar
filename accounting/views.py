@@ -4,6 +4,7 @@ from django.views.generic.detail import DetailView
 from .models import Post
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+
 from django.conf import settings
 from reportlab.pdfgen import canvas
 from django.http import HttpResponse
@@ -75,7 +76,6 @@ class CaseListDetail(DetailView):
 
 
         return context
-
 
 
 def toPDF(request,pk):
@@ -185,3 +185,8 @@ def logout_view(request):
 # show toast template
 class ToastShow(TemplateView):
     template_name = 'accounting/toast-template.html'
+
+# show users view
+class GetUsers(TemplateView):
+    template_name = 'accounting/users.html'
+

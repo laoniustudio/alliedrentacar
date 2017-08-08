@@ -1,0 +1,56 @@
+{% extends 'invitations/forms/invite_base.html' %}
+{% load static %}
+{% block inviteReviewport %}
+     INVITE USER
+{% endblock %}
+{% block inviteBase %}
+    <div class="container" >
+
+     <md-card class="bg_white">
+        <div class="md-toolbar-tools">
+            <img src="{% static 'images/plus.png' %}">
+            <a href="{% url 'accounting:users' %}"><button class="btn btn-sm c-btn md-whiteframe-2dp marginRight-3" style="width: 80%">
+                ADD INVITATION
+            </button></a>
+            <a href="{% url 'sendInvite' %}">
+                <img src="{% static 'images/list.png' %}">
+            <button class="btn btn-sm c-btn md-whiteframe-2dp" style="width: 80%">
+               INVITATION LIST
+            </button></a>
+
+
+        </div>
+    </md-card>
+    <md-card class="container_password">
+
+
+
+      <form  method="post">
+        {% csrf_token %}
+
+            <input id="id_email" maxlength="254" name="email" type="email" class="password_input" placeholder="Enter Your Email" required/>
+            <button type="submit" class="btn btn-primary">Send</button>
+
+                {% if form.errors %}
+                    {% if success_message %}
+                         success_message
+                    {% else %}
+                        <span style="float: right;margin-top: 1rem;color:#99a7b9 ">
+                            This e-mail address has already been invited or can not send to the address !
+                        </span>
+                    {% endif %}
+                {% endif %}
+
+
+
+
+      </form>
+
+     </md-card></div>
+{% endblock %}
+
+{% block inviteCustomJS %}
+
+{% endblock %}
+
+

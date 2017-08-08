@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from accounting.models import Post,DamageIn,MoreImageIn
+from django.contrib.auth.models import User
 
 
 # all case
@@ -38,3 +39,10 @@ class ImgInMoreDamageUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = MoreImageIn
         fields = ['damage']
+
+# users : get
+class UsersGetSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = '__all__'

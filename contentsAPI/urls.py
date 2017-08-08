@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import PostAPIViewGet,PostAPIViewPost,DamageInDetailAPIGetUpdate,MoreDamageInDetailAPIGet,MoreDamageInDetailAPIUpdate,PostAPIViewUpdate,PostAPIViewDelete
+from .views import PostAPIViewGet,PostAPIViewPost,DamageInDetailAPIGetUpdate,MoreDamageInDetailAPIGet,MoreDamageInDetailAPIUpdate,PostAPIViewUpdate,PostAPIViewDelete,UserGet
 
 
 app_name = 'contentsAPI'
@@ -12,5 +12,6 @@ urlpatterns = [
     url(r'^moredamage/(?P<post>\d+)/$',MoreDamageInDetailAPIGet.as_view(),name='apiMoreDamage'),
     url(r'^alldamage/(?P<post>\d+)/$',DamageInDetailAPIGetUpdate.as_view(),name='apiAllDamage'),
     url(r'^moredamage/(?P<post>\d+)/(?P<id>\d+)/$',MoreDamageInDetailAPIUpdate.as_view(),name='apiMoreDamageUpdate'),
+    url(r'^users/$',UserGet.as_view(),name='apiUsers'),
 
 ]
