@@ -1,4 +1,4 @@
-{% extends 'invitations/forms/invite_base.html' %}
+{% extends 'invitations/invite_base.html' %}
 {% load static %}
 {% block inviteReviewport %}
      INVITE USER
@@ -12,7 +12,7 @@
             <a href="{% url 'accounting:users' %}"><button class="btn btn-sm c-btn md-whiteframe-2dp marginRight-3" style="width: 80%">
                 ADD INVITATION
             </button></a>
-            <a href="{% url 'invitations:send-invite' %}">
+            <a href="{% url 'invitation:sendInvite' %}">
                 <img src="{% static 'images/list.png' %}">
             <button class="btn btn-sm c-btn md-whiteframe-2dp" style="width: 80%">
                INVITATION LIST
@@ -26,22 +26,22 @@
 
 
       <form  method="post">
-        {% csrf_token %}
+            {% csrf_token %}
 
             <input id="id_email" maxlength="254" name="email" type="email" class="password_input" placeholder="Enter Your Email" required/>
             <button type="submit" class="btn btn-primary">Send</button>
 
-                {% if form.errors %}
-                    {% if success_message %}
+
+                    {% if msg %}
                          <span style="float: right;margin-top: 1rem;color:#0aa699 ">
                             Email has been send!
                         </span>
                     {% else %}
                         <span style="float: right;margin-top: 1rem;color:#a94442 ">
-                            This e-mail address has already been invited or can not send to the address !
+                            {{ error }}
                         </span>
                     {% endif %}
-                {% endif %}
+
       </form>
 
      </md-card></div>

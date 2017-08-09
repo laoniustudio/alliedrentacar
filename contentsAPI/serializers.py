@@ -46,3 +46,10 @@ class UsersGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
+
+# users : get Permission
+class PermissionGetSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ['id','is_staff']

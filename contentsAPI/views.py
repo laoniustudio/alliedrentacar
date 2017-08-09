@@ -1,7 +1,9 @@
 from django.shortcuts import render,get_object_or_404
 from rest_framework import generics
 from rest_framework.viewsets import ModelViewSet
-from .serializers import PostSerializer,ImgInMoreDamageSerializer,ImgInDamageSerializer,ImgInMoreDamageUpdateSerializer,PostSerializerUpdate,UsersGetSerializer
+from .serializers import (PostSerializer,ImgInMoreDamageSerializer,ImgInDamageSerializer,
+                          ImgInMoreDamageUpdateSerializer,PostSerializerUpdate,UsersGetSerializer,
+                          PermissionGetSerializer)
 from accounting.models import Post, DamageIn,MoreImageIn
 from django.contrib.auth.models import User
 # Create your views here.
@@ -60,8 +62,14 @@ class MoreDamageInDetailAPIUpdate(MultipleFieldLookupMixin,generics.RetrieveUpda
     queryset = MoreImageIn.objects.all()
     lookup_fields = ('post','id')
 
-# Users : get
+# Users : get all
 class UserGet(generics.ListAPIView):
     serializer_class = UsersGetSerializer
     queryset = User.objects.all()
+
+# Users : get permission
+class PermissionGet(generics.RetrieveAPIView):
+    serializer_class = PermissionGetSerializer
+    queryset = User.objects.all()
+    lookup_fields = 'id'
 

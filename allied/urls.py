@@ -28,13 +28,11 @@ urlpatterns = [
     url(r'^dashboard/',include('accounting.urls')),
     url(r'^api/',include('contentsAPI.urls')),
 
-    url(r'^accounts/', include('allauth.urls')),
+
     url(r'^signup/$', signup,name='signup'),
-    url(r'^invitations/', include('invitations.urls', namespace='invitations')),
+    url(r'^invitation/',include('invitation.urls')),
 
-
-
-
+    # reset password
     url(r'^password_reset/$', password_reset, name='password_reset'),
     url(r'^password_reset/done/$', password_reset_done, name='password_reset_done'),
     url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',

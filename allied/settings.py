@@ -38,14 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounting.apps.AccountingConfig',
     'rest_framework',
-    # `allauth`
-    'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'invitations',
+    'invitation'
 ]
-# `allauth`
-SITE_ID = 1
+
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -80,18 +75,6 @@ TEMPLATES = [
         },
     },
 ]
-# `allauth`
-AUTHENTICATION_BACKENDS = (
-    # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
-
-)
-# `allauth`
-ACCOUNT_AUTHENTICATION_METHOD ='email'
-ACCOUNT_EMAIL_REQUIRED=True
-ACCOUNT_ADAPTER = 'invitations.models.InvitationsAdapter'
-INVITATIONS_INVITATION_ONLY=True
-INVITATIONS_SIGNUP_REDIRECT ='signup'
 
 
 WSGI_APPLICATION = 'allied.wsgi.application'
@@ -148,6 +131,8 @@ USE_TZ = True
 LOGIN_URL = 'home'
 
 #emial host
+SITE_HOST = '127.0.0.1:8000'#for develop
+DEFAULT_FROM_EMAIL = 'Allied Rent A Car'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_PASSWORD = '1314530ab'

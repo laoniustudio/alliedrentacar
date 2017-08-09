@@ -2,13 +2,13 @@
  * Created by sun on 8/2/2017.
  */
 //main controller
-alliedApp.controller("usersCtl",function ($scope,$http,$filter) {
+alliedApp.controller("usersCtl",function ($scope,$http,) {
 
             // get func
             $http.get("/api/users")
                 .then(function (response) {
                     $scope.users = response.data;
-                    console.info($scope.posts)
+
                 });
 
 

@@ -18,8 +18,9 @@
 <body>
 <div id="wrap">
     <div id="main">
+    <div ng-init="sessid='{{ user.id }}'" ></div>
      <!-- Navigation Start -->
-         <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+         <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse" ng-controller="navCtl">
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon" style="background-image: url({% static 'images/menu.png' %})"></span>
       </button>
@@ -33,7 +34,7 @@
                       <span>Welcome, David Sun</span></a>
                 </li>
                 <li class="nav-item font-weight-bold">
-                  <a class="nav-link" href="{% url 'accounting:users' %}"><img src="{% static 'images/users.png' %}">
+                  <a class="nav-link" href="#" ng-click="checkPermission()"><img src="{% static 'images/users.png' %}">
                       <span>Users</span></a>
                 </li>
                 <li class="nav-item font-weight-bold">
@@ -104,6 +105,8 @@
     <script src="{% static 'js/angular-messages.min.js' %}"></script>
     <script src="{% static 'node_modules/angular-material/angular-material.min.js' %}"></script>
     <script src="{% static 'js/controller/alliedrentacar.js' %}"></script>
+    <script src="{% static 'js/controller/nav_perm.js' %}"></script>
+
 
 
 

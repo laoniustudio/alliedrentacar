@@ -22,14 +22,17 @@
      <div class="login-page">
       <div class="form">
           <img src="{% static 'images/logoSmall.png' %}">
-        <form class="login-form">
-          <input type="text" placeholder="First Name"/>
-          <input type="text" placeholder="Last Name"/>
-            <input type="text" placeholder="username"/>
-          <input type="text" placeholder="Username"/>
-            <input type="password" placeholder="Password"/>
-          <input type="password" placeholder="Confirm Password"/>
+        <form class="login-form" method="POST">
+        {% csrf_token %}
+          <input type="text" name="firstname" placeholder="First Name"/>
+          <input type="text" name="lastname" placeholder="Last Name"/>
+            <input type="text" name="username" placeholder="username"/>
+            <input type="password" name="password" placeholder="Password"/>
+          <input type="password"  placeholder="Confirm Password"/>
           <button>Register</button>
+            {% if error %}
+                {{ error }}
+            {% endif %}
         </form>
       </div>
 </div>
@@ -68,7 +71,7 @@
     <!-- Angular -->
     <script src="{% static 'node_modules/angular/angular.min.js' %}"></script>
     <script src="{% static 'js/angular-animate.min.js' %}"></script>
-    <script src="{% static 'js/angular-aria.min.js' %}"></script>
+
     <script src="{% static 'js/angular-messages.min.js' %}"></script>
     <script src="{% static 'node_modules/angular-material/angular-material.min.js' %}"></script>
     <script src="{% static 'js/controller/alliedrentacar.js' %}"></script>

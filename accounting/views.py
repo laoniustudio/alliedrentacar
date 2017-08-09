@@ -11,6 +11,7 @@ from django.http import HttpResponse
 from django.utils import formats
 from .utility import CaseDetailExtend
 from django.views.generic.base import TemplateView
+
 # Create your views here.
 
 # homepage default view
@@ -188,5 +189,6 @@ class ToastShow(TemplateView):
 
 # show users view
 class GetUsers(TemplateView):
+    permission_required = 'invitation.send_invitation'
     template_name = 'accounting/users.html'
 

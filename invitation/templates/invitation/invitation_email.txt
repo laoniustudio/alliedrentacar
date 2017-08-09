@@ -1,0 +1,4 @@
+You have been invited to join Allied DamageID, please register on the link below.
+
+To accept the invitation, please click the link below:
+{{ link }}
