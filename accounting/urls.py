@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import CaseList,logout_view,CaseListDetail,toPDF,ToastShow,GetUsers
+from .views import CaseList,logout_view,CaseListDetail,toPDF,ToastShow,GetUsers,PermissionToast
 from django.contrib.auth.decorators import login_required, permission_required
 
 
@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^(?P<pk>\d+)$',CaseListDetail.as_view(),name='casedetail'),
     url(r'^(?P<pk>\d+)/toPDF/$', toPDF, name='pdf'),
     url(r'^toast-template/$', ToastShow.as_view(), name='toast'),
+    url(r'^toast_permission/$', PermissionToast.as_view(), name='toastPermission'),
     url(r'^users/$', GetUsers.as_view(), name='users'),
 ]

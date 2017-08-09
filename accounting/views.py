@@ -183,9 +183,13 @@ def logout_view(request):
     logout(request)
     return redirect('home')
 
-# show toast template
+# show case detail toast template
 class ToastShow(TemplateView):
     template_name = 'accounting/toast-template.html'
+
+# show no permission template
+class PermissionToast(TemplateView):
+    template_name = 'accounting/toast_permission.html'
 
 # show users view
 class GetUsers(TemplateView):

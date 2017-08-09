@@ -1,51 +1,70 @@
-{% extends 'invitations/invite_base.html' %}
+{% extends 'base.html' %}
 {% load static %}
-{% block inviteReviewport %}
+{% block reviewport %}
      INVITE USER
 {% endblock %}
-{% block inviteBase %}
+{% block base %}
     <div class="container" >
 
-     <md-card class="bg_white">
+     <md-card ng-cloak>
         <div class="md-toolbar-tools">
-            <img src="{% static 'images/plus.png' %}">
-            <a href="{% url 'accounting:users' %}"><button class="btn btn-sm c-btn md-whiteframe-2dp marginRight-3" style="width: 80%">
-                ADD INVITATION
-            </button></a>
-            <a href="{% url 'invitation:sendInvite' %}">
+            <img src="{% static 'images/list.png' %}">
+            <a href="{% url 'accounting:users' %}"><md-button class="md-raised marginRight-3" >
+                Users List
+            </md-button></a>
                 <img src="{% static 'images/list.png' %}">
-            <button class="btn btn-sm c-btn md-whiteframe-2dp" style="width: 80%">
-               INVITATION LIST
-            </button></a>
-
+            <md-button class="md-raised " >
+               Invitation List
+            </md-button>
 
         </div>
-    </md-card>
-    <md-card class="container_password">
+     </md-card>
 
+    <md-card class="container_password" ng-controller="inviteCtl" ng-cloak>
 
-
-      <form  method="post">
+      <form  method="post" action="{% url 'invitation:sendInvite'%}">
             {% csrf_token %}
 
-            <input id="id_email" maxlength="254" name="email" type="email" class="password_input" placeholder="Enter Your Email" required/>
-            <button type="submit" class="btn btn-primary">Send</button>
+<section layout="row">
+            <md-input-container>
+                <label>Email</label>
+                <input name="email" type="email"required>
+            </md-input-container>
+
+            <md-input-container style="margin-left: 2rem">
+                <label>Role</label>
+                <md-select ng-model="myDateStatus"  name="role" ng-change="changeInOut(myDateStatus)" >
+                        <md-option value="user"  selected>User</md-option>
+                        <md-option value="admin" >Company Admin</md-option>
+                </md-select>
+            </md-input-container>
 
 
+            <md-button type="submit"  class="md-raised" style="height: 10%; margin-left: 2rem;margin-top: 1rem">Send</md-button>
+            <div style="float: right;margin-top: 1.5rem; margin-left: 17rem">
                     {% if msg %}
-                         <span style="float: right;margin-top: 1rem;color:#0aa699 ">
+                         <span style="color:#0aa699 ">
                             Email has been send!
                         </span>
-                    {% else %}
-                        <span style="float: right;margin-top: 1rem;color:#a94442 ">
+                    {% elif error %}
+                        <span style="color:#a94442 ">
                             {{ error }}
                         </span>
+                    {% else %}
+                        <span style="color:#99a7b9 ">
+                            An invitation will send to the email address.
+                        </span>
                     {% endif %}
+            </div>
+</section>
 
       </form>
 
-     </md-card></div>
+     </md-card>
+    </div>
 {% endblock %}
 
-
+{% block customJS %}
+<script src="{% static 'js/controller/invite.js' %}"></script>
+{% endblock %}
 

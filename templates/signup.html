@@ -19,17 +19,33 @@
 <div id="wrap">
 <div id="main" class="container clear-top" >
 
-     <div class="login-page">
+     <div class="login-page" ng-controller="inviteCtl">
       <div class="form">
           <img src="{% static 'images/logoSmall.png' %}">
-        <form class="login-form" method="POST">
-        {% csrf_token %}
-          <input type="text" name="firstname" placeholder="First Name"/>
-          <input type="text" name="lastname" placeholder="Last Name"/>
-            <input type="text" name="username" placeholder="username"/>
-            <input type="password" name="password" placeholder="Password"/>
-          <input type="password"  placeholder="Confirm Password"/>
-          <button>Register</button>
+        <form class="login-form" method="POST" name="userForm" action="{% url 'signup' %}">
+            {% csrf_token %}
+          <input type="text" name="firstname" placeholder="First Name" required/>
+          <input type="text" name="lastname" placeholder="Last Name" required/>
+            <input type="text" name="username" placeholder="username" ng-pattern="/^\w+$/" ng-model="username" ng-minlength="4" ng-maxlength="12" required/>
+             <div ng-messages="userForm.username.$error">
+                  <p ng-message="minlength"style="color: #bd4147;">At least 4 characters.</p>
+                  <p ng-message="maxlength"style="color: #bd4147;">At most 12 characters.</p>
+                 <p ng-message="pattern"style="color: #bd4147;">Must be alphanumeric with an optional underscore.</p>
+             </div>
+        <input name="password" type="password" class="form-control" placeholder="Password" ng-model="formData.password"  ng-minlength="6" ng-maxlength="20"  required />
+            <div ng-messages="userForm.password.$error">
+                  <p ng-message="minlength"style="color: #bd4147;">At least 6 characters.</p>
+                  <p ng-message="maxlength"style="color: #bd4147;">At most 20 characters.</p>
+
+            </div>
+        <input name="confirm_password" type="password" class="form-control" placeholder="Confirm Password" ng-model="formData.confirmPassword"  ng-minlength="6" ng-maxlength="20" required />
+        <span ng-show="formData.password != formData.confirmPassword" style="color: #bd4147;">Your passwords must match.</span>
+            <div ng-messages="userForm.confirm_password.$error">
+                  <p ng-message="minlength" style="color: #bd4147;">At least 6 characters.</p>
+                  <p ng-message="maxlength"style="color: #bd4147;">At most 20 characters.</p>
+
+            </div>
+          <button ng-disabled="formData.password != formData.confirmPassword && !userForm.password.$error && !userForm.username.$error && !userForm.confirm_password.$error" type="submit">Register</button>
             {% if error %}
                 {{ error }}
             {% endif %}
@@ -61,20 +77,15 @@
 
 
 </body>
-     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="{% static 'js/jquery-slim.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
-
     <!-- Angular -->
     <script src="{% static 'node_modules/angular/angular.min.js' %}"></script>
     <script src="{% static 'js/angular-animate.min.js' %}"></script>
-
+    <script src="{% static 'js/angular-aria.min.js' %}"></script>
     <script src="{% static 'js/angular-messages.min.js' %}"></script>
     <script src="{% static 'node_modules/angular-material/angular-material.min.js' %}"></script>
     <script src="{% static 'js/controller/alliedrentacar.js' %}"></script>
+    <script src="{% static 'js/controller/invite.js' %}"></script>
+
 
 
 </html>

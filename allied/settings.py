@@ -38,7 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounting.apps.AccountingConfig',
     'rest_framework',
-    'invitation'
+    'invitation',
+    
+    # `allauth`
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+
 ]
 
 
@@ -75,6 +81,17 @@ TEMPLATES = [
         },
     },
 ]
+# `allauth`
+AUTHENTICATION_BACKENDS = (
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+
+)
+SITE_ID = 1
+ACCOUNT_AUTHENTICATION_METHOD ='email'
+ACCOUNT_EMAIL_REQUIRED=True
+ACCOUNT_UNIQUE_EMAIL =True
 
 
 WSGI_APPLICATION = 'allied.wsgi.application'

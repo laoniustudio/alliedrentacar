@@ -31,6 +31,7 @@ urlpatterns = [
 
     url(r'^signup/$', signup,name='signup'),
     url(r'^invitation/',include('invitation.urls')),
+    url(r'^accounts/', include('allauth.urls')),
 
     # reset password
     url(r'^password_reset/$', password_reset, name='password_reset'),

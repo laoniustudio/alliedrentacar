@@ -12,15 +12,17 @@ def invite(request):
       if User.objects.filter(email=request.POST['email']).exists():
           return render(request, 'invitations/invite.html',{'error':'The email has already registed!'})
       else:
-          invitation = Invitation(
-            email=request.POST['email'],
-            code=User.objects.make_random_password(20),
-          )
+            if request.POST["role"] == "user":
+                is_staff = False
+            else:
+                is_staff = True
+            invitation = Invitation(email=request.POST['email'],code=User.objects.make_random_password(20),staff=is_staff)
 
-          invitation.save()
-          invitation.send()
-          success_message = 'Email has been invited'
-          return render(request, 'invitations/invite.html',{'msg':success_message})
+
+            invitation.save()
+            invitation.send()
+
+            return render(request, 'invitations/invite.html',{'msg':'Email has been invited'})
 
   else:
       return render(request, 'invitations/invite.html')

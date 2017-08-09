@@ -15,7 +15,7 @@ def homesignin(request):
             return redirect('accounting:caselist')
 
         else:
-            return render(request,'signin.html',{'error':'Username or password is not correct !'})
+            return render(request,'signin.html',{'error':'Email or password is not correct !'})
     return render(request, 'signin.html')
 
 def signup(request):
@@ -34,10 +34,12 @@ def signup(request):
             auth_user = authenticate(request=request, username=username, password=password)
 
             if auth_user is None:
-                user = User.objects.create_user(username=username,password=password,email=email,first_name=firstname,last_name=lastname)
+                invitation = Invitation.objects.get(email=email)
+                user = User.objects.create_user(username=username,password=password,
+                                                email=email,first_name=firstname,last_name=lastname,is_staff=invitation.staff)
                 user.save()
                 login(request, auth_user)
-                invitation = Invitation.objects.filter(email=email)
+
                 invitation.delete()
 
                 return redirect('accounting:caselist')
