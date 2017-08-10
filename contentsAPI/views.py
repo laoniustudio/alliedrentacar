@@ -3,9 +3,10 @@ from rest_framework import generics
 from rest_framework.viewsets import ModelViewSet
 from .serializers import (PostSerializer,ImgInMoreDamageSerializer,ImgInDamageSerializer,
                           ImgInMoreDamageUpdateSerializer,PostSerializerUpdate,UsersGetSerializer,
-                          PermissionGetSerializer)
+                          PermissionGetSerializer,InvitationGetSerializer)
 from accounting.models import Post, DamageIn,MoreImageIn
 from django.contrib.auth.models import User
+from invitation.models import Invitation
 # Create your views here.
 class MultipleFieldLookupMixin(object):
     """
@@ -72,4 +73,10 @@ class PermissionGet(generics.RetrieveAPIView):
     serializer_class = PermissionGetSerializer
     queryset = User.objects.all()
     lookup_fields = 'id'
+
+# get invitation
+class InvitationGet(generics.ListAPIView):
+    serializer_class = InvitationGetSerializer
+    queryset = Invitation.objects.all()
+
 

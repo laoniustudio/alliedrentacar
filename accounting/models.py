@@ -87,4 +87,12 @@ class DamageIn(models.Model):
     def __str__(self):
         return self.post.contractNumber
 
-# register with email link
+class Car(models.Model):
+    unitNumber = models.CharField(max_length=200)
+    plateNumber = models.CharField(max_length=200)
+    model = models.CharField(max_length=500)
+    status = models.BooleanField(default=False)
+    image = models.ImageField(upload_to="cars")
+
+    def __str__(self):
+        return self.unitNumber

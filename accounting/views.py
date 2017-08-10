@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from .models import Post
+from .models import Post,Car
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
@@ -193,6 +193,29 @@ class PermissionToast(TemplateView):
 
 # show users view
 class GetUsers(TemplateView):
-    permission_required = 'invitation.send_invitation'
     template_name = 'accounting/users.html'
 
+# show cars view
+class GetCars(TemplateView):
+    template_name = 'accounting/cars.html'
+
+# show add car view
+class AddCar(TemplateView):
+    template_name = 'accounting/add_car.html'
+
+    def post(self, request, *args, **kwargs):
+
+        unitNumber = request.POST['Unit']
+        plate = request.POST['plate']
+        model= request.POST['model']
+        image= request.POST.get("imageup", "")
+
+        if request.POST['status'] =="active":
+            status = True
+        else:
+            status = False
+
+        car = Car(unitNumber=unitNumber,plateNumber=plate,status=status,model=model,image=image)
+        car.save()
+
+        return redirect('accounting:cars')

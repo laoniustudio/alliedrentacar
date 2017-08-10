@@ -3,25 +3,21 @@
 
 {% block reviewport %}
 
-    USERS LIST
+    CAR LIST
 
 {% endblock %}
 
 {% block base %}
 
-<div class="container" ng-controller="usersCtl" ng-cloak>
+<div class="container" ng-cloak>
 
     <md-card>
         <div class="md-toolbar-tools">
-            <img src="{% static 'images/plus.png' %}">
-            <a href="{% url 'invitation:sendInvite' %}"><md-button class="md-raised marginRight-3" >
-                Add Invitation
+            <img src="{% static 'images/list.png' %}">
+            <a href="{% url 'accounting:carCreate' %}"><md-button class="md-raised marginRight-3" >
+                Add Car
             </md-button></a>
-                <img src="{% static 'images/list.png' %}">
-            <a href="{% url 'invitation:inviteList' %}">
-            <md-button class="md-raised " >
-               Invitation List
-            </md-button></a>
+
 
         </div>
     </md-card>
@@ -65,7 +61,5 @@
 </div>
 {% endblock %}
 
-{% block customJS %}
-     <script src="{% static 'js/controller/users.js' %}"></script>
-{% endblock %}
+
 

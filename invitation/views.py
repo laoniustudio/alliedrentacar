@@ -4,7 +4,7 @@ from .forms import InviteForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-
+from django.views.generic.base import TemplateView
 @csrf_exempt
 def invite(request):
   if request.method == 'POST':
@@ -33,3 +33,6 @@ def invite_accept(request, token):
   invitation = get_object_or_404(Invitation, code__exact=token)
   request.session['invitation'] = invitation.id
   return redirect('signup')
+
+class GetInvitation(TemplateView):
+    template_name = 'invitations/invite_list.html'

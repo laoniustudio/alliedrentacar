@@ -29,23 +29,23 @@
             <input type="text" name="username" placeholder="username" ng-pattern="/^\w+$/" ng-model="username" ng-minlength="4" ng-maxlength="12" required/>
              <div ng-messages="userForm.username.$error">
                   <p ng-message="minlength"style="color: #bd4147;">At least 4 characters.</p>
-                  <p ng-message="maxlength"style="color: #bd4147;">At most 12 characters.</p>
                  <p ng-message="pattern"style="color: #bd4147;">Must be alphanumeric with an optional underscore.</p>
              </div>
-        <input name="password" type="password" class="form-control" placeholder="Password" ng-model="formData.password"  ng-minlength="6" ng-maxlength="20"  required />
+        <input name="password" type="password" class="form-control" placeholder="Password" ng-model="password"  ng-minlength="6" ng-maxlength="20"  required />
             <div ng-messages="userForm.password.$error">
                   <p ng-message="minlength"style="color: #bd4147;">At least 6 characters.</p>
-                  <p ng-message="maxlength"style="color: #bd4147;">At most 20 characters.</p>
+
 
             </div>
-        <input name="confirm_password" type="password" class="form-control" placeholder="Confirm Password" ng-model="formData.confirmPassword"  ng-minlength="6" ng-maxlength="20" required />
-        <span ng-show="formData.password != formData.confirmPassword" style="color: #bd4147;">Your passwords must match.</span>
-            <div ng-messages="userForm.confirm_password.$error">
+        <input name="confirm_password" type="password" class="form-control" placeholder="Confirm Password" ng-model="confirmPassword"  ng-minlength="6" ng-maxlength="20" required />
+        <span ng-show="password != confirmPassword" style="color: #bd4147;">Your passwords must match.</span>
+            <div ng-messages="confirm_password.$error">
                   <p ng-message="minlength" style="color: #bd4147;">At least 6 characters.</p>
-                  <p ng-message="maxlength"style="color: #bd4147;">At most 20 characters.</p>
+
 
             </div>
-          <button ng-disabled="formData.password != formData.confirmPassword && !userForm.password.$error && !userForm.username.$error && !userForm.confirm_password.$error" type="submit">Register</button>
+          <button ng-disabled="password != confirmPassword || userForm.username.$error.minlength
+          || userForm.password.$error.minlength || userForm.confirmPassword.$error.minlength || userForm.username.$error.pattern" type="submit">Register</button>
             {% if error %}
                 {{ error }}
             {% endif %}

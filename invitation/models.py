@@ -12,6 +12,7 @@ class Invitation(models.Model):
   email = models.EmailField()
   code = models.CharField(max_length=20)
   staff = models.BooleanField(default=False)
+  date = models.DateField(auto_now_add=True)
 
   def __unicode__(self):
     return u'%s, %s' % (self.sender.username, self.email)

@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from accounting.models import Post,DamageIn,MoreImageIn
+from invitation.models import Invitation
 from django.contrib.auth.models import User
 
 
@@ -53,3 +54,11 @@ class PermissionGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id','is_staff']
+
+
+# get invitation
+class InvitationGetSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Invitation
+        fields = '__all__'

@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block reviewport %}
+
+    CAR LIST
+
+{% endblock %}
+
+{% block base %}
+
+<div class="container"  ng-cloak>
+
+    <md-card>
+        <div class="md-toolbar-tools">
+            <img src="{% static 'images/list.png' %}">
+            <a href="{% url 'accounting:cars' %}"><md-button class="md-raised marginRight-3" >
+                Car List
+            </md-button></a>
+        </div>
+    </md-card>
+
+
+    <md-card layout-padding ng-controller="carCtl">
+
+        <label><strong>CREATE CAR</strong></label>
+
+        <form name="userForm" method="POST" enctype="multipart/form-data" action="{% url 'accounting:carCreate' %}">
+            {% csrf_token %}
+          <div layout-gt-sm="row">
+
+            <md-input-container class="md-block" flex-gt-sm>
+                  <label>Unit Number</label>
+                  <input required name="Unit" />
+            </md-input-container>
+
+            <div flex="5" hide-xs hide-sm>
+              <!-- Spacer //-->
+            </div>
+
+            <md-input-container class="md-block" flex-gt-sm>
+                  <label>Model </label>
+                  <input name="model"required />
+            </md-input-container>
+
+          </div>
+
+          <div layout-gt-sm="row">
+
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>License Plate</label>
+              <input name="plate" required/>
+
+            </md-input-container>
+
+            <div flex="5" hide-xs hide-sm>
+              <!-- Spacer //-->
+            </div>
+
+             <md-input-container class="md-block" flex-gt-sm>
+                    <label>Status</label>
+                    <md-select ng-model="myDateStatus" name="status" >
+                            <md-option value="active"  selected>Active</md-option>
+                            <md-option value="inactive" >Inactive</md-option>
+                    </md-select>
+                </md-input-container>
+
+          </div>
+
+
+             <div layout-gt-sm="row">
+                  <md-input-container class="md-block" flex-gt-sm>
+                        <input id="uploadFile" placeholder="Upload Image" ng-model="imageUp" disabled="disabled" />
+               </md-input-container>
+
+                 <md-input-container class="md-block" flex-gt-sm>
+                       <div class="fileUpload btn btn-warning">
+                                <span>UPLOAD</span>
+                                <input id="uploadBtn" name="imageup" type="file" class="upload"  onchange="angular.element(this).scope().uploadImage()"/>
+                            </div>
+               </md-input-container>
+
+                <div flex="5" hide-xs hide-sm>
+                  <!-- Spacer //-->
+                </div>
+            </div>
+             <md-input-container class="md-block" flex-gt-sm>
+                    <md-button class="md-raised md-primary" type="submit">Create Car</md-button>
+                </md-input-container>
+        </form>
+
+
+    </md-card>
+
+
+
+</div>
+
+
+{% endblock %}
+
+
+{% block customJS %}
+     <script src="{% static 'js/controller/cars.js' %}"></script>
+{% endblock %}
