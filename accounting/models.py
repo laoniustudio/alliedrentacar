@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
+import os
 # Create your models here.
 
 class Post (models.Model):
@@ -88,11 +89,14 @@ class DamageIn(models.Model):
         return self.post.contractNumber
 
 class Car(models.Model):
-    unitNumber = models.CharField(max_length=200)
-    plateNumber = models.CharField(max_length=200)
+    unitNumber = models.CharField(max_length=200,unique=True)
+    plateNumber = models.CharField(max_length=200,unique=True)
     model = models.CharField(max_length=500)
     status = models.BooleanField(default=False)
     image = models.ImageField(upload_to="cars")
 
     def __str__(self):
         return self.unitNumber
+
+    def imagename(self):
+        return os.path.basename(self.image.name)

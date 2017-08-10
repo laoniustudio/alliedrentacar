@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from .views import (PostAPIViewGet,PostAPIViewPost,DamageInDetailAPIGetUpdate,MoreDamageInDetailAPIGet,
-MoreDamageInDetailAPIUpdate,PostAPIViewUpdate,PostAPIViewDelete,UserGet,PermissionGet,InvitationGet)
+MoreDamageInDetailAPIUpdate,PostAPIViewUpdate,PostAPIViewDelete,UserGet,PermissionGet,InvitationGet,CarGet,CarDetailGet)
 
 
 app_name = 'contentsAPI'
@@ -16,5 +16,7 @@ urlpatterns = [
     url(r'^users/$',UserGet.as_view(),name='apiUsers'),
     url(r'^users/permission/(?P<pk>\d+)/$',PermissionGet.as_view(),name='apiPermission'),
     url(r'^users/invitation/$',InvitationGet.as_view(),name='apiInvitation'),
+    url(r'^cars/$',CarGet.as_view(),name='apiCar'),
+    url(r'^cars/(?P<pk>\d+)$',CarDetailGet.as_view(),name='apiCarDetail'),
 
 ]

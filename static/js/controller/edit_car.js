@@ -1,6 +1,6 @@
 
 //main controller
-alliedApp.controller("carsCtl",function ($http,$scope) {
+alliedApp.controller("carsEditCtl",function ($http,$scope) {
             // get func
             $http.get("/api/cars/")
                 .then(function (response) {

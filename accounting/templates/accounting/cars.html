@@ -9,7 +9,7 @@
 
 {% block base %}
 
-<div class="container" ng-cloak>
+<div class="container" ng-controller="carsCtl" ng-cloak>
 
     <md-card>
         <div class="md-toolbar-tools">
@@ -24,20 +24,17 @@
     <table class="table table-hover" ng-cloak>
               <thead>
                 <tr >
-                  <th ng-click="sortBy('username')">USERNAME
-                      <span class="sortorder" ng-show="propertyName === 'username'" ng-class="{reverse: reverse}"></span>
+                  <th ng-click="sortBy('unitNumber')">UNIT NUMBER
+                      <span class="sortorder" ng-show="propertyName === 'unitNumber'" ng-class="{reverse: reverse}"></span>
                   </th>
-                  <th ng-click="sortBy('email')">EMAIL
-                  <span class="sortorder" ng-show="propertyName === 'email'" ng-class="{reverse: reverse}"></span>
+                  <th ng-click="sortBy('plateNumber')">License Plate
+                  <span class="sortorder" ng-show="propertyName === 'plateNumber'" ng-class="{reverse: reverse}"></span>
                   </th>
-                  <th ng-click="sortBy('first_name')">FIRST NAME
-                  <span class="sortorder" ng-show="propertyName === 'first_name'" ng-class="{reverse: reverse}"></span>
+                  <th ng-click="sortBy('model')">MODEL
+                  <span class="sortorder" ng-show="propertyName === 'model'" ng-class="{reverse: reverse}"></span>
                   </th>
-                  <th ng-click="sortBy('groups')">ROLE
-                  <span class="sortorder" ng-show="propertyName === 'groups'" ng-class="{reverse: reverse}"></span>
-                  </th>
-                  <th ng-click="sortBy('date_joined')">DATE CREATED
-                  <span class="sortorder" ng-show="propertyName === 'date_joined'" ng-class="{reverse: reverse}"></span>
+                  <th ng-click="sortBy('status')">STATUS
+                  <span class="sortorder" ng-show="propertyName === 'status'" ng-class="{reverse: reverse}"></span>
                   </th>
                 </tr>
               </thead>
@@ -45,12 +42,13 @@
 
               {% verbatim %}
 
-               <tr ng-repeat="user in users |orderBy:propertyName:reverse" >
-                  <th>{{user.username}}</th>
-                  <td>{{user.email}}</td>
-                  <td>{{user.first_name}}</td>
-                  <td>{{user.groups}}</td>
-                  <td>{{user.date_joined | date:'MM/dd/yyyy'}}</td>
+               <tr ng-repeat="car in cars |orderBy:propertyName:reverse" >
+                   <th><a href="{{car.id}}">{{car.unitNumber}}</a></th>
+                  <td>{{car.plateNumber}}</td>
+                  <td>{{car.model}}</td>
+                   <td><span ng-if="car.status == true">Active</span>
+                      <span ng-if="car.status == false">Inactive</span>
+                  </td>
                 </tr>
               {% endverbatim %}
               </tbody>
@@ -62,4 +60,6 @@
 {% endblock %}
 
 
-
+{% block customJS %}
+     <script src="{% static 'js/controller/cars.js' %}"></script>
+{% endblock %}

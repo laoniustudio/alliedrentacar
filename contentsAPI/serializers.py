@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from accounting.models import Post,DamageIn,MoreImageIn
+from accounting.models import Post,DamageIn,MoreImageIn,Car
 from invitation.models import Invitation
 from django.contrib.auth.models import User
 
@@ -61,4 +61,18 @@ class InvitationGetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Invitation
+        fields = '__all__'
+
+# get cars
+class CarGetSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Car
+        fields = ['id','unitNumber','plateNumber','model','status']
+
+# get cars detail
+class CarDetailGetSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Car
         fields = '__all__'

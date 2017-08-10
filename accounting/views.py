@@ -11,6 +11,7 @@ from django.http import HttpResponse
 from django.utils import formats
 from .utility import CaseDetailExtend
 from django.views.generic.base import TemplateView
+from django.views.generic.edit import UpdateView
 
 # Create your views here.
 
@@ -205,10 +206,10 @@ class AddCar(TemplateView):
 
     def post(self, request, *args, **kwargs):
 
-        unitNumber = request.POST['Unit']
+        unitNumber = request.POST['unit']
         plate = request.POST['plate']
         model= request.POST['model']
-        image= request.POST.get("imageup", "")
+        image= request.FILES['imageup']
 
         if request.POST['status'] =="active":
             status = True
@@ -219,3 +220,37 @@ class AddCar(TemplateView):
         car.save()
 
         return redirect('accounting:cars')
+
+
+# show add car view
+class EditCar(DetailView):
+    model = Car
+    template_name = 'accounting/edit_car.html'
+    context_object_name = 'detail'
+
+    def post(self, request, *args, **kwargs):
+
+        myid = request.POST['id']
+        unitNumber = request.POST['unit']
+        plate = request.POST['plate']
+        model= request.POST['model']
+
+        car = Car.objects.get(id=myid)
+        if request.POST['status'] =="active":
+            status = True
+        else:
+            status = False
+
+        car.unitNumber = unitNumber
+        car.plateNumber=plate
+        car.status=status
+        car.model=model
+        try:
+            image = request.FILES['imageup']
+            car.image=image
+        except:
+            pass
+        car.save()
+
+        return redirect('accounting:cars')
+

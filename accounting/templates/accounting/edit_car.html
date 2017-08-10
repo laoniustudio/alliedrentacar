@@ -3,7 +3,7 @@
 
 {% block reviewport %}
 
-    CAR CREATE
+    CAR EDIT
 
 {% endblock %}
 
@@ -11,8 +11,13 @@
 
 <div class="container"  ng-cloak>
 
+
     <md-card>
         <div class="md-toolbar-tools">
+            <img src="{% static 'images/plus.png' %}">
+            <a href="{% url 'accounting:carCreate' %}"><md-button class="md-raised marginRight-3" >
+                ADD Car
+            </md-button></a>
             <img src="{% static 'images/list.png' %}">
             <a href="{% url 'accounting:cars' %}"><md-button class="md-raised marginRight-3" >
                 Car List
@@ -23,15 +28,20 @@
 
     <md-card layout-padding ng-controller="carCtl">
 
-        <label id="clickTry"><strong>CREATE CAR</strong></label>
+        <label><strong>EDIT CAR</strong></label>
+        {% if detail.image %}
+            <img src="http://127.0.0.1:8000/media/{{ detail.image }}" style="width: 30rem;height: 20rem">
+        {% else %}
+            <img src="{% static 'images/notfound.png' %}" style="width: 30rem;height: 20rem">
+        {% endif %}
 
-        <form name="userForm" method="POST" enctype="multipart/form-data" action="{% url 'accounting:carCreate' %}">
+        <form name="userForm" method="POST" enctype="multipart/form-data" action="{% url 'accounting:carEdit' detail.id %}">
             {% csrf_token %}
           <div layout-gt-sm="row">
-
+            <input hidden value="{{ detail.id }}" name="id">
             <md-input-container class="md-block" flex-gt-sm>
                   <label>Unit Number</label>
-                  <input required name="unit" />
+                  <input required name="unit" value="{{ detail.unitNumber}}"/>
             </md-input-container>
 
             <div flex="5" hide-xs hide-sm>
@@ -40,7 +50,7 @@
 
             <md-input-container class="md-block" flex-gt-sm>
                   <label>Model </label>
-                  <input name="model"required />
+                  <input name="model"required value="{{ detail.model}}"/>
             </md-input-container>
 
           </div>
@@ -49,7 +59,7 @@
 
             <md-input-container class="md-block" flex-gt-sm>
               <label>License Plate</label>
-              <input name="plate" required/>
+              <input name="plate" required value="{{ detail.plateNumber}}" />
 
             </md-input-container>
 
@@ -60,8 +70,14 @@
              <md-input-container class="md-block" flex-gt-sm>
                     <label>Status</label>
                     <md-select ng-model="myDateStatus" name="status" >
+                        {% if detail.status %}
                             <md-option value="active"  selected>Active</md-option>
                             <md-option value="inactive" >Inactive</md-option>
+                        {% else %}
+                            <md-option value="active"  >Active</md-option>
+                            <md-option value="inactive" selected>Inactive</md-option>
+                        {% endif %}
+
                     </md-select>
                 </md-input-container>
 
@@ -70,8 +86,9 @@
 
              <div layout-gt-sm="row">
                   <md-input-container class="md-block" flex-gt-sm>
-                      <input ng-if="!filename" id="uploadFile" placeholder="Change Upload Image"  disabled="disabled" />
+                        <input ng-if="!filename" id="uploadFile" placeholder="Change Upload Image" value="{{ detail.imagename}}" disabled="disabled" />
                         <input ng-if="filename" id="uploadFile" placeholder="Change Upload Image" value="{% verbatim %}{{ filename }}{% endverbatim %}" disabled="disabled" />
+
 
                </md-input-container>
 
@@ -87,7 +104,7 @@
                 </div>
             </div>
              <md-input-container class="md-block" flex-gt-sm>
-                    <md-button class="md-raised md-primary" type="submit">Create Car</md-button>
+                    <md-button class="md-raised md-primary" type="submit">Update car</md-button>
                 </md-input-container>
         </form>
 

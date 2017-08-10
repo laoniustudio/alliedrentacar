@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS =  ['alliedrentacar.herokuapp.com','127.0.0.1']
 
+#custom url
+BASE_URL = "http://127.0.0.1:8000/"
+
 # Application definition
 
 INSTALLED_APPS = [

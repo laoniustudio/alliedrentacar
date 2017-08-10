@@ -7,7 +7,6 @@ alliedApp.controller("inviteCtl",function ($http,$scope) {
             $http.get("/api/users/invitation/")
                 .then(function (response) {
                     $scope.invitations = response.data;
-                    console.info($scope.invitation)
                 });
 
 

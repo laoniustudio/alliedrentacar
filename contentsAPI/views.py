@@ -3,8 +3,8 @@ from rest_framework import generics
 from rest_framework.viewsets import ModelViewSet
 from .serializers import (PostSerializer,ImgInMoreDamageSerializer,ImgInDamageSerializer,
                           ImgInMoreDamageUpdateSerializer,PostSerializerUpdate,UsersGetSerializer,
-                          PermissionGetSerializer,InvitationGetSerializer)
-from accounting.models import Post, DamageIn,MoreImageIn
+                          PermissionGetSerializer,InvitationGetSerializer,CarGetSerializer,CarDetailGetSerializer)
+from accounting.models import Post, DamageIn,MoreImageIn,Car
 from django.contrib.auth.models import User
 from invitation.models import Invitation
 # Create your views here.
@@ -78,5 +78,17 @@ class PermissionGet(generics.RetrieveAPIView):
 class InvitationGet(generics.ListAPIView):
     serializer_class = InvitationGetSerializer
     queryset = Invitation.objects.all()
+
+# get cars
+class CarGet(generics.ListAPIView):
+    serializer_class = CarGetSerializer
+    queryset = Car.objects.all()
+
+# get car detail
+class CarDetailGet(generics.RetrieveUpdateAPIView):
+    serializer_class = CarDetailGetSerializer
+    queryset = Car.objects.all()
+    lookup_fields = 'id'
+
 
 

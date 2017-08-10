@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import CaseList,logout_view,CaseListDetail,toPDF,ToastShow,GetUsers,PermissionToast,GetCars,AddCar
+from .views import CaseList,logout_view,CaseListDetail,toPDF,ToastShow,GetUsers,PermissionToast,GetCars,AddCar,EditCar
 from django.contrib.auth.decorators import login_required, permission_required
 
 
@@ -15,4 +15,5 @@ urlpatterns = [
     url(r'^users/$', GetUsers.as_view(), name='users'),
     url(r'^cars/$', GetCars.as_view(), name='cars'),
     url(r'^cars/create$', AddCar.as_view(), name='carCreate'),
+    url(r'^cars/(?P<pk>\d+)/$', EditCar.as_view(), name='carEdit'),
 ]
