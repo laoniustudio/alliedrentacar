@@ -7,3 +7,4 @@ Django==1.11.3
 pillow
 djangorestframework
 reportlab
+allauth
