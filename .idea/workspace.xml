@@ -32,8 +32,8 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/allied/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="27" column="27" lean-forward="false" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
+            <state relative-caret-position="299">
+              <caret line="109" column="3" lean-forward="false" selection-start-line="109" selection-start-column="3" selection-end-line="109" selection-end-column="3" />
               <folding>
                 <element signature="e#305#314#0" expanded="true" />
               </folding>
@@ -1129,8 +1129,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/allied/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="27" column="27" lean-forward="false" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
+        <state relative-caret-position="299">
+          <caret line="109" column="3" lean-forward="false" selection-start-line="109" selection-start-column="3" selection-end-line="109" selection-end-column="3" />
           <folding>
             <element signature="e#305#314#0" expanded="true" />
           </folding>
