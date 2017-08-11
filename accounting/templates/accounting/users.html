@@ -25,6 +25,7 @@
 
         </div>
     </md-card>
+    <md-card style="padding: 2rem">
     <table class="table table-hover" ng-cloak>
               <thead>
                 <tr >
@@ -49,18 +50,22 @@
 
               {% verbatim %}
 
-               <tr ng-repeat="user in users |orderBy:propertyName:reverse" >
+               <tr dir-paginate="user in users |orderBy:propertyName:reverse| itemsPerPage: 10" >
                   <th>{{user.username}}</th>
                   <td>{{user.email}}</td>
                   <td>{{user.first_name}}</td>
-                  <td>{{user.groups}}</td>
+                  <td><span ng-if="user.is_staff == true">Company Admin</span>
+                      <span ng-if="user.is_staff == false">User</span>
+                  </td>
                   <td>{{user.date_joined | date:'MM/dd/yyyy'}}</td>
                 </tr>
               {% endverbatim %}
               </tbody>
-    </table>
-
-
+        </table>
+    </md-card>
+<div layout="row" layout-align="center center">
+        <dir-pagination-controls></dir-pagination-controls>
+    </div>
 
 </div>
 {% endblock %}

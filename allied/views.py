@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect,Http404
 from invitation.models import Invitation
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
+from django.views.generic.base import TemplateView
+
 def homesignin(request):
     if request.method == "POST":
 
@@ -49,4 +51,3 @@ def signup(request):
         return render(request, 'signup.html')
     else:
         return Http404
-

@@ -8,9 +8,10 @@ from django.contrib.auth.models import User
 class PostSerializer(serializers.ModelSerializer):
     dateOutTime = serializers.DateTimeField(format="%m/%d/%Y")
     dateInTime = serializers.DateTimeField(format="%m/%d/%Y")
+    username = serializers.CharField(source='user.username', read_only=True)
     class Meta:
         model = Post
-        fields = '__all__'
+        fields = ['username','contractNumber','plateNumber','dateOutTime','dateInTime','status','damage']
 # update post comment
 class PostSerializerUpdate(serializers.ModelSerializer):
 
@@ -46,7 +47,7 @@ class UsersGetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ['first_name','is_staff','username','email','date_joined']
 
 # users : get Permission
 class PermissionGetSerializer(serializers.ModelSerializer):

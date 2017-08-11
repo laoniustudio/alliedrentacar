@@ -21,7 +21,8 @@
 
         </div>
     </md-card>
-    <table class="table table-hover" ng-cloak>
+    <md-card style="padding: 2rem">
+        <table class="table table-hover" ng-cloak>
               <thead>
                 <tr >
                   <th ng-click="sortBy('unitNumber')">UNIT NUMBER
@@ -42,7 +43,7 @@
 
               {% verbatim %}
 
-               <tr ng-repeat="car in cars |orderBy:propertyName:reverse" >
+               <tr dir-paginate="car in cars |orderBy:propertyName:reverse | itemsPerPage: 10" >
                    <th><a href="{{car.id}}">{{car.unitNumber}}</a></th>
                   <td>{{car.plateNumber}}</td>
                   <td>{{car.model}}</td>
@@ -52,7 +53,11 @@
                 </tr>
               {% endverbatim %}
               </tbody>
-    </table>
+        </table>
+        </md-card>
+<div layout="row" layout-align="center center">
+        <dir-pagination-controls></dir-pagination-controls>
+    </div>
 
 
 

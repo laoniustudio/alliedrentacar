@@ -5,7 +5,7 @@ import os
 # Create your models here.
 
 class Post (models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,related_name="users")
     contractNumber = models.CharField(max_length=200, blank= True)
     plateNumber = models.CharField(max_length=200,blank= True)
     dateOutTime = models.DateTimeField()

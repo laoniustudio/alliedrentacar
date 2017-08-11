@@ -2,7 +2,7 @@
  * Created by sun on 7/18/2017.
  */
 
-var alliedApp = angular.module('allied',['ngMaterial','ngMessages']);
+var alliedApp = angular.module('allied',['ngMaterial','ngMessages','angularUtils.directives.dirPagination']);
 
 // for django csf protections
 alliedApp.config(function($httpProvider) {

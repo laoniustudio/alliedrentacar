@@ -19,7 +19,7 @@
             </md-button></a>
         </div>
      </md-card>
-
+    <md-card style="padding: 2rem">
      <table class="table table-hover" ng-cloak>
               <thead>
                 <tr >
@@ -42,7 +42,7 @@
 
               {% verbatim %}
 
-               <tr ng-repeat="invite in invitations |orderBy:propertyName:reverse" >
+               <tr dir-paginate="invite in invitations |orderBy:propertyName:reverse| itemsPerPage: 10" >
                   <th>{{invite.code}}</th>
                   <td>{{invite.email}}</td>
                   <td><span ng-if="invite.staff == true">Company Admin</span>
@@ -52,8 +52,11 @@
                 </tr>
               {% endverbatim %}
               </tbody>
-    </table>
-
+        </table>
+    </md-card>
+<div layout="row" layout-align="center center">
+        <dir-pagination-controls></dir-pagination-controls>
+    </div>
     </div>
 {% endblock %}
 

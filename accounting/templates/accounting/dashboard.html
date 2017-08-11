@@ -8,12 +8,9 @@
 {% block base %}
 
 <div class="container" ng-controller="caseListCtl" ng-cloak>
+<md-card>
+    <div  layout-padding ng-cloak style="padding: 1rem 2rem">
 
-    <div  layout-padding ng-cloak>
-
-            <md-card-title>
-
-            </md-card-title>
 
             <md-card-content>
               <div layout="row" >
@@ -51,9 +48,9 @@
               </div>
             </md-card-content>
 
-    </div>
 
-    <table class="table table-hover" >
+
+    <table class="table table-hover"  >
               <thead>
                 <tr >
                   <th ng-click="sortBy('contractNumber')">CONTRACT NO.
@@ -80,22 +77,26 @@
 
               {% verbatim %}
 
-               <tr ng-repeat="post in posts | filter:searchText | filter:searchDate:searchStatus | filter:searchAll |orderBy:propertyName:reverse" >
+               <tr dir-paginate="post in posts | filter:searchText | filter:searchDate:searchStatus | filter:searchAll |orderBy:propertyName:reverse| itemsPerPage: 10" >
                   <th><a href="{{post.id}}">{{post.contractNumber}}</a></th>
                   <td>{{post.plateNumber}}</td>
                   <td>{{post.username}}</td>
                   <td>{{post.dateOutTime }}</td>
                   <td>{{post.dateInTime  }}</td>
-                  <td><span class="badge badge-pill badge-warning" ng-if="post.damage">!</span>
-                      <span class="badge badge-pill badge-success" ng-if="!post.damage">R</span>
+                  <td><span class="badge badge-pill badge-danger" ng-if="post.damage">!</span>
+
                       {{post.status}}</td>
                 </tr>
+
+
               {% endverbatim %}
               </tbody>
     </table>
-
-
-
+          </div>
+    </md-card>
+    <div layout="row" layout-align="center center">
+        <dir-pagination-controls></dir-pagination-controls>
+    </div>
 </div>
 {% endblock %}
 

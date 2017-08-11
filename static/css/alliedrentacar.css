@@ -129,10 +129,11 @@ form .password_input.focus {
 }
 .c-footer {
   position: relative;
-  margin-top: -100px; /* negative value of footer height */
-  height: 100px;
+  margin-top: -70px; /* negative value of footer height */
+  height: 70px;
   clear:both;
   padding-top:20px;
+
 }
 
 /* signup */
@@ -208,4 +209,30 @@ form .password_input.focus {
     cursor: pointer;
     opacity: 0;
     filter: alpha(opacity=0);
+}
+
+.pagination a{
+    position: relative;
+    display: block;
+    padding: 0.7rem 1rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #0275d8;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    text-decoration: none;
+}
+
+.pagination a:focus{
+    position: relative;
+    display: block;
+    padding: 0.7rem 1rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #fff;
+    background-color: #0275d8;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    text-decoration: none;
 }

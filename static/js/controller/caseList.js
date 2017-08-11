@@ -8,24 +8,7 @@ alliedApp.controller("caseListCtl",function ($scope,$http,$filter) {
             $http.get("/api/allposts")
                 .then(function (response) {
                     $scope.posts = response.data;
-                    console.info($scope.posts)
                 });
-            // // post func
-            //  var data = $.param({
-            //     fName: $scope.firstName,
-            //     lName: $scope.lastName
-            // });
-            //
-            // var config = {
-            //     headers : {ww
-            //         'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-            //     }
-            // }
-            //
-            // $http.post('/ServerRequest/PostDataResponse', data, config)
-            // .success(function (data, status, headers, config) {
-            //     $scope.PostDataResponse = data;
-            // })
 
             /**
              * filter
@@ -59,6 +42,5 @@ alliedApp.controller("caseListCtl",function ($scope,$http,$filter) {
                 $scope.propertyName = propertyName;
               };
 
-
-
 });
+
