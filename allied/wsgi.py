@@ -16,5 +16,5 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "allied.settings")
 application = get_wsgi_application()
 
 # for heroku
-# from whitenoise.django import DjangoWhiteNoise
-# application = DjangoWhiteNoise(application)
+from whitenoise.django import DjangoWhiteNoise
+application = DjangoWhiteNoise(application)
